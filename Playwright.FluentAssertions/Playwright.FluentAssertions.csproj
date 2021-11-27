@@ -13,7 +13,7 @@
 	  <Copyright>Copyright © Evgeny Nazarchuk</Copyright>
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
 	  <Title>Playwright.FluentAssertions</Title>
-	  <Description>Fluent assertions for Playwright</Description>
+	  <Description>Fluent assertions methods for Playwright</Description>
 	  
   </PropertyGroup>
 
