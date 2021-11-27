@@ -275,7 +275,7 @@ Because: {because}
         return element;
     }
 
-    public static IElementHandle BeTextContent(
+    public static IElementHandle HaveTextContent(
         this ReferenceTypeAssertion<IElementHandle> elementHandle,
         string pattern,
         string because = "no reason given")
@@ -297,7 +297,7 @@ Because: {because}
         return element;
     }
 
-    public static IElementHandle BeNotTextContent(
+    public static IElementHandle HaveNotTextContent(
         this ReferenceTypeAssertion<IElementHandle> elementHandle,
         string pattern,
         string because = "no reason given")
@@ -319,7 +319,7 @@ Because: {because}
         return element;
     }
 
-    public static IElementHandle BeInnerHTML(
+    public static IElementHandle HaveInnerHTML(
         this ReferenceTypeAssertion<IElementHandle> elementHandle,
         string pattern,
         string because = "no reason given")
@@ -341,7 +341,7 @@ Because: {because}
         return element;
     }
 
-    public static IElementHandle BeNotInnerHTML(
+    public static IElementHandle HaveNotInnerHTML(
         this ReferenceTypeAssertion<IElementHandle> elementHandle,
         string pattern,
         string because = "no reason given")
@@ -363,7 +363,7 @@ Because: {because}
         return element;
     }
 
-    public static IElementHandle BeInnerText(
+    public static IElementHandle HaveInnerText(
         this ReferenceTypeAssertion<IElementHandle> elementHandle,
         string pattern,
         string because = "no reason given")
@@ -385,7 +385,7 @@ Because: {because}
         return element;
     }
 
-    public static IElementHandle BeNotInnerText(
+    public static IElementHandle HaveNotInnerText(
         this ReferenceTypeAssertion<IElementHandle> elementHandle,
         string pattern,
         string because = "no reason given")
@@ -407,7 +407,7 @@ Because: {because}
         return element;
     }
 
-    public static IElementHandle BeInputValue(
+    public static IElementHandle HaveInputValue(
         this ReferenceTypeAssertion<IElementHandle> elementHandle,
         string pattern,
         string because = "no reason given")
@@ -429,7 +429,7 @@ Because: {because}
         return element;
     }
 
-    public static IElementHandle BeNotInputValue(
+    public static IElementHandle HaveNotInputValue(
         this ReferenceTypeAssertion<IElementHandle> elementHandle,
         string pattern,
         string because = "no reason given")
@@ -451,7 +451,7 @@ Because: {because}
         return element;
     }
 
-    public static IElementHandle BeAttribute(
+    public static IElementHandle HaveAttribute(
         this ReferenceTypeAssertion<IElementHandle> elementHandle,
         string attributeName,
         string because = "no reason given")
@@ -471,7 +471,7 @@ Because: {because}
         return element;
     }
 
-    public static IElementHandle BeNotAttribute(
+    public static IElementHandle HaveNotAttribute(
         this ReferenceTypeAssertion<IElementHandle> elementHandle,
         string attributeName,
         string because = "no reason given")
@@ -491,7 +491,7 @@ Because: {because}
         return element;
     }
 
-    public static IElementHandle BeAttributeValue(
+    public static IElementHandle HaveAttributeValue(
         this ReferenceTypeAssertion<IElementHandle> elementHandle,
         string attributeName,
         string attributeValue,

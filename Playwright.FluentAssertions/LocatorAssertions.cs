@@ -256,7 +256,7 @@ Because: {because}
         return element;
     }
 
-    public static ILocator BeTextContent(
+    public static ILocator HaveTextContent(
         this ReferenceTypeAssertion<ILocator> locator,
         string pattern,
         string because = "no reason given")
@@ -278,7 +278,7 @@ Because: {because}
         return element;
     }
 
-    public static ILocator BeNotTextContent(
+    public static ILocator HaveNotTextContent(
         this ReferenceTypeAssertion<ILocator> locator,
         string pattern,
         string because = "no reason given")
@@ -300,7 +300,7 @@ Because: {because}
         return element;
     }
 
-    public static ILocator BeInnerHTML(
+    public static ILocator HaveInnerHTML(
         this ReferenceTypeAssertion<ILocator> locator,
         string pattern,
         string because = "no reason given")
@@ -322,7 +322,7 @@ Because: {because}
         return element;
     }
 
-    public static ILocator BeNotInnerHTML(
+    public static ILocator HaveNotInnerHTML(
         this ReferenceTypeAssertion<ILocator> locator,
         string pattern,
         string because = "no reason given")
@@ -344,7 +344,7 @@ Because: {because}
         return element;
     }
 
-    public static ILocator BeInnerText(
+    public static ILocator HaveInnerText(
         this ReferenceTypeAssertion<ILocator> locator,
         string pattern,
         string because = "no reason given")
@@ -366,7 +366,7 @@ Because: {because}
         return element;
     }
 
-    public static ILocator BeNotInnerText(
+    public static ILocator HaveNotInnerText(
         this ReferenceTypeAssertion<ILocator> locator,
         string pattern,
         string because = "no reason given")
@@ -388,7 +388,7 @@ Because: {because}
         return element;
     }
 
-    public static ILocator BeInputValue(
+    public static ILocator HaveInputValue(
         this ReferenceTypeAssertion<ILocator> locator,
         string pattern,
         string because = "no reason given")
@@ -410,7 +410,7 @@ Because: {because}
         return element;
     }
 
-    public static ILocator BeNotInputValue(
+    public static ILocator HaveNotInputValue(
         this ReferenceTypeAssertion<ILocator> locator,
         string pattern,
         string because = "no reason given")
@@ -432,7 +432,7 @@ Because: {because}
         return element;
     }
 
-    public static ILocator BeAttribute(
+    public static ILocator HaveAttribute(
         this ReferenceTypeAssertion<ILocator> locator,
         string attributeName,
         string because = "no reason given")
@@ -452,7 +452,7 @@ Because: {because}
         return element;
     }
 
-    public static ILocator BeNotAttribute(
+    public static ILocator HaveNotAttribute(
         this ReferenceTypeAssertion<ILocator> locator,
         string attributeName,
         string because = "no reason given")
@@ -472,7 +472,7 @@ Because: {because}
         return element;
     }
 
-    public static ILocator BeAttributeValue(
+    public static ILocator HaveAttributeValue(
         this ReferenceTypeAssertion<ILocator> locator,
         string attributeName,
         string attributeValue,
