@@ -119,7 +119,7 @@ Because: {because}
         return frame.Value;
     }
 
-    public static IFrame HaveElementChecked(
+    public static IFrame HaveCheckedElement(
         this ReferenceTypeAssertion<IFrame> frame,
         string selector,
         string because = "no reason given",
@@ -144,7 +144,7 @@ Because: {because}
         return frame.Value;
     }
 
-    public static IFrame HaveNotElementChecked(
+    public static IFrame HaveNotCheckedElement(
         this ReferenceTypeAssertion<IFrame> frame,
         string selector,
         string because = "no reason given",
@@ -169,7 +169,7 @@ Because: {because}
         return frame.Value;
     }
 
-    public static IFrame HaveElementDisabled(
+    public static IFrame HaveDisabledElement(
         this ReferenceTypeAssertion<IFrame> frame,
         string selector,
         string because = "no reason given",
@@ -194,7 +194,7 @@ Because: {because}
         return frame.Value;
     }
 
-    public static IFrame HaveNotElementDisabled(
+    public static IFrame HaveNotDisabledElement(
         this ReferenceTypeAssertion<IFrame> frame,
         string selector,
         string because = "no reason given",
@@ -219,7 +219,7 @@ Because: {because}
         return frame.Value;
     }
 
-    public static IFrame HaveElementEditable(
+    public static IFrame HaveEditableElement(
         this ReferenceTypeAssertion<IFrame> frame,
         string selector,
         string because = "no reason given",
@@ -244,7 +244,7 @@ Because: {because}
         return frame.Value;
     }
 
-    public static IFrame HaveNotElementEditable(
+    public static IFrame HaveNotEditableElement(
         this ReferenceTypeAssertion<IFrame> frame,
         string selector,
         string because = "no reason given",
@@ -269,7 +269,7 @@ Because: {because}
         return frame.Value;
     }
 
-    public static IFrame HaveElementEnabled(
+    public static IFrame HaveEnabledElement(
         this ReferenceTypeAssertion<IFrame> frame,
         string selector,
         string because = "no reason given",
@@ -294,7 +294,7 @@ Because: {because}
         return frame.Value;
     }
 
-    public static IFrame HaveNotElementEnabled(
+    public static IFrame HaveNotEnabledElement(
         this ReferenceTypeAssertion<IFrame> frame,
         string selector,
         string because = "no reason given",
@@ -319,7 +319,7 @@ Because: {because}
         return frame.Value;
     }
 
-    public static IFrame HaveElementHidden(
+    public static IFrame HaveHiddenElement(
         this ReferenceTypeAssertion<IFrame> frame,
         string selector,
         string because = "no reason given",
@@ -344,7 +344,7 @@ Because: {because}
         return frame.Value;
     }
 
-    public static IFrame HaveNotElementHidden(
+    public static IFrame HaveNotHiddenElement(
         this ReferenceTypeAssertion<IFrame> frame,
         string selector,
         string because = "no reason given",
@@ -369,7 +369,7 @@ Because: {because}
         return frame.Value;
     }
 
-    public static IFrame HaveElementVisible(
+    public static IFrame HaveVisibleElement(
         this ReferenceTypeAssertion<IFrame> frame,
         string selector,
         string because = "no reason given",
@@ -394,7 +394,7 @@ Because: {because}
         return frame.Value;
     }
 
-    public static IFrame HaveNotElementVisible(
+    public static IFrame HaveNotVisibleElement(
         this ReferenceTypeAssertion<IFrame> frame,
         string selector,
         string because = "no reason given",

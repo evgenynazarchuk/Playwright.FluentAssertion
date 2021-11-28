@@ -119,7 +119,7 @@ Because: {because}
         return page.Value;
     }
 
-    public static IPage HaveElementChecked(
+    public static IPage HaveCheckedElement(
         this ReferenceTypeAssertion<IPage> page,
         string selector,
         string because = "no reason given",
@@ -144,7 +144,7 @@ Because: {because}
         return page.Value;
     }
 
-    public static IPage HaveNotElementChecked(
+    public static IPage HaveNotCheckedElement(
         this ReferenceTypeAssertion<IPage> page,
         string selector,
         string because = "no reason given",
@@ -169,7 +169,7 @@ Because: {because}
         return page.Value;
     }
 
-    public static IPage HaveElementDisabled(
+    public static IPage HaveDisabledElement(
         this ReferenceTypeAssertion<IPage> page,
         string selector,
         string because = "no reason given",
@@ -194,7 +194,7 @@ Because: {because}
         return page.Value;
     }
 
-    public static IPage HaveNotElementDisabled(
+    public static IPage HaveNotDisabledElement(
         this ReferenceTypeAssertion<IPage> page,
         string selector,
         string because = "no reason given",
@@ -219,7 +219,7 @@ Because: {because}
         return page.Value;
     }
 
-    public static IPage HaveElementEditable(
+    public static IPage HaveEditableElement(
         this ReferenceTypeAssertion<IPage> page,
         string selector,
         string because = "no reason given",
@@ -244,7 +244,7 @@ Because: {because}
         return page.Value;
     }
 
-    public static IPage HaveNotElementEditable(
+    public static IPage HaveNotEditableElement(
         this ReferenceTypeAssertion<IPage> page,
         string selector,
         string because = "no reason given",
@@ -269,7 +269,7 @@ Because: {because}
         return page.Value;
     }
 
-    public static IPage HaveElementEnabled(
+    public static IPage HaveEnabledElement(
         this ReferenceTypeAssertion<IPage> page,
         string selector,
         string because = "no reason given",
@@ -294,7 +294,7 @@ Because: {because}
         return page.Value;
     }
 
-    public static IPage HaveNotElementEnabled(
+    public static IPage HaveNotEnabledElement(
         this ReferenceTypeAssertion<IPage> page,
         string selector,
         string because = "no reason given",
@@ -319,7 +319,7 @@ Because: {because}
         return page.Value;
     }
 
-    public static IPage HaveElementHidden(
+    public static IPage HaveHiddenElement(
         this ReferenceTypeAssertion<IPage> page,
         string selector,
         string because = "no reason given",
@@ -344,7 +344,7 @@ Because: {because}
         return page.Value;
     }
 
-    public static IPage HaveNotElementHidden(
+    public static IPage HaveNotHiddenElement(
         this ReferenceTypeAssertion<IPage> page,
         string selector,
         string because = "no reason given",
@@ -369,7 +369,7 @@ Because: {because}
         return page.Value;
     }
 
-    public static IPage HaveElementVisible(
+    public static IPage HaveVisibleElement(
         this ReferenceTypeAssertion<IPage> page,
         string selector,
         string because = "no reason given",
@@ -394,7 +394,7 @@ Because: {because}
         return page.Value;
     }
 
-    public static IPage HaveNotElementVisible(
+    public static IPage HaveNotVisibleElement(
         this ReferenceTypeAssertion<IPage> page,
         string selector,
         string because = "no reason given",
