@@ -512,4 +512,28 @@ Because: {because}
 
         return element;
     }
+
+    public static IElementHandle HaveComputedStyle(
+        this ReferenceTypeAssertion<IElementHandle> elementHandle,
+        string styleName,
+        string expectedStyleValue,
+        string because = "no reason given")
+    {
+        var element = elementHandle.Value;
+        var actualStylevalue = element.Evaluate($"e => getComputedStyle(e).{styleName}", element).ToString();
+        if (actualStylevalue is null) throw new AssertException($"Style not found. Style name: {styleName}");
+
+        if (string.Compare(actualStylevalue, expectedStyleValue) != 0)
+        {
+            throw new AssertException($@"
+HaveComputedStyle Assert Exception
+Style name: {styleName}
+Expected style value: {expectedStyleValue}
+Actual style value: {actualStylevalue}
+Because: {because}
+");
+        }
+
+        return elementHandle.Value;
+    }
 }

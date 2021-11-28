@@ -7,12 +7,12 @@ public static class PrimitiveAssertions
         return new ReferenceTypeAssertion<string>(content);
     }
 
-    public static void BeEquals(this string actualString, string expectedString, string because = "no reason given")
+    public static void Be(this string actualString, string expectedString, string because = "no reason given")
     {
         if (string.Compare(actualString, expectedString) != 0)
         {
             throw new AssertException($@"
-BeEquals Assert Exception
+Be Assert Exception
 Expected string: {expectedString}
 Actual string: {actualString}
 Because: {because}
@@ -20,12 +20,12 @@ Because: {because}
         }
     }
 
-    public static void BeEquals(this IEnumerable<string> actualStrings, IEnumerable<string> expectedStrings, string because = "no reason given")
+    public static void Be(this IEnumerable<string> actualStrings, IEnumerable<string> expectedStrings, string because = "no reason given")
     {
         if (actualStrings.Count() != expectedStrings.Count())
         {
             throw new AssertException($@"
-BeEquals Assert Exception
+Be Assert Exception
 Expected total number: {expectedStrings.Count()}
 Actual total number: {actualStrings.Count()}
 Because: {because}
@@ -37,7 +37,7 @@ Because: {because}
             if (string.Compare(actualStrings.ElementAt(i), expectedStrings.ElementAt(i)) != 0)
             {
                 throw new AssertException($@"
-BeEquals Assert Exception
+Be Assert Exception
 Index string: {i}
 Expected string: {expectedStrings.ElementAt(i)}
 Actual string: {actualStrings.ElementAt(i)}
@@ -54,7 +54,7 @@ Because: {because}
             throw new AssertException($@"
 BeTrue Assert Exception
 Expected bool: true
-Actual bool: false
+Actual bool: {value}
 Because: {because}
 ");
         }
@@ -67,7 +67,7 @@ Because: {because}
             throw new AssertException($@"
 BeFalse Assert Exception
 Expected bool: false
-Actual bool: true
+Actual bool: {value}
 Because: {because}
 ");
         }

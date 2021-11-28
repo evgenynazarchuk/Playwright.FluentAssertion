@@ -711,4 +711,33 @@ Because: {because}
 
         return page.Value;
     }
+
+    public static IPage HaveElementComputedStyle(
+        this ReferenceTypeAssertion<IPage> page,
+        string selector,
+        string styleName,
+        string expectedStyleValue,
+        string because = "no reason given",
+        PageQuerySelectorOptions? options = null)
+    {
+        var element = page.Value.QuerySelector(selector, options);
+        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
+
+        var actualStylevalue = element.Evaluate($"e => getComputedStyle(e).{styleName}", element).ToString();
+        if (actualStylevalue is null) throw new AssertException($"Style not found. Style name: {styleName}");
+
+        if (string.Compare(actualStylevalue, expectedStyleValue) != 0)
+        {
+            throw new AssertException($@"
+HaveComputedStyle Assert Exception
+Selector: {selector}
+Style name: {styleName}
+Expected style value: {expectedStyleValue}
+Actual style value: {actualStylevalue}
+Because: {because}
+");
+        }
+
+        return page.Value;
+    }
 }
