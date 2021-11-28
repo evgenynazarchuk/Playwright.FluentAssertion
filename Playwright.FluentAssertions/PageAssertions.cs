@@ -130,7 +130,7 @@ Because: {because}
 
         var isChecked = element.IsChecked();
 
-        if (!isChecked)
+        if (isChecked is false)
         {
             throw new AssertException(@$"
 HaveElementChecked Assert Exception
@@ -643,11 +643,13 @@ Because: {because}
         PageQuerySelectorOptions? options = null)
     {
         var element = page.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
+        if (element is null) throw new AssertException($"Element not found. Selector: {selector}");
 
-        var attribute = element.GetAttribute(attributeName);
-
-        if (attribute is null)
+        try
+        {
+            element.GetAttribute(attributeName);
+        }
+        catch
         {
             throw new AssertException(@$"
 HaveElementAttribute Assert Exception
@@ -668,43 +670,54 @@ Because: {because}
         PageQuerySelectorOptions? options = null)
     {
         var element = page.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
+        if (element is null) throw new AssertException($"Element not found. Selector: {selector}");
 
-        var attribute = element.GetAttribute(attributeName);
-
-        if (attribute is not null)
+        try
         {
-            throw new AssertException(@$"
+            element.GetAttribute(attributeName);
+        }
+        catch
+        {
+            return page.Value;
+        }
+
+        throw new AssertException(@$"
 HaveNotElementAttribute Assert Exception
 Selector: {selector}
 Not expected attribute: {attributeName}
 Because: {because}
 ");
-        }
-
-        return page.Value;
     }
 
     public static IPage HaveElementAttributeValue(
         this ReferenceTypeAssertion<IPage> page,
         string selector,
         string attributeName,
-        string attributeValue,
+        string expectedAttributeValue,
         string because = "no reason given",
         PageQuerySelectorOptions? options = null)
     {
         var element = page.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
+        if (element is null) throw new AssertException($"Element not found. Selector: {selector}");
+        string? actualAttributeValue = null;
 
-        var value = element.GetAttribute(attributeName);
+        try
+        {
+            actualAttributeValue = element.GetAttribute(attributeName) ?? "";
+        }
+        catch
+        {
+            throw new AssertException($"Attribute not found. Attibute name: {attributeName}");
+        }
 
-        if (value is null && string.Compare(value, attributeValue) != 0)
+        if (string.Compare(actualAttributeValue, expectedAttributeValue) != 0)
         {
             throw new AssertException(@$"
 HaveElementAttributeValue Assert Exception
 Selector: {selector}
 Expected attribute: {attributeName}
-Expected attribute value: {attributeValue}
+Expected attribute value: {expectedAttributeValue}
+Actual attribute value: {actualAttributeValue}
 Because: {because}
 ");
         }
@@ -721,19 +734,22 @@ Because: {because}
         PageQuerySelectorOptions? options = null)
     {
         var element = page.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
+        if (element is null) throw new AssertException($"Element not found. Selector: {selector}");
+        var actualStyleValue = element.Evaluate($"e => getComputedStyle(e).{styleName}", element).ToString();
 
-        var actualStylevalue = element.Evaluate($"e => getComputedStyle(e).{styleName}", element).ToString();
-        if (actualStylevalue is null) throw new AssertException($"Style not found. Style name: {styleName}");
+        if (actualStyleValue == "")
+        {
+            throw new AssertException($"Style not found. Style name: {styleName}");
+        }
 
-        if (string.Compare(actualStylevalue, expectedStyleValue) != 0)
+        if (string.Compare(actualStyleValue, expectedStyleValue) != 0)
         {
             throw new AssertException($@"
 HaveComputedStyle Assert Exception
 Selector: {selector}
 Style name: {styleName}
 Expected style value: {expectedStyleValue}
-Actual style value: {actualStylevalue}
+Actual style value: {actualStyleValue}
 Because: {because}
 ");
         }

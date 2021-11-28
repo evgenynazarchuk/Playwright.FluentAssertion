@@ -493,4 +493,32 @@ Because: {because}
 
         return element;
     }
+
+    public static ILocator HaveComputedStyle(
+        this ReferenceTypeAssertion<ILocator> locator,
+        string styleName,
+        string expectedStyleValue,
+        string because = "no reason given")
+    {
+        var element = locator.Value;
+        var actualStyleValue = element.Evaluate($"e => getComputedStyle(e).{styleName}", element).ToString();
+
+        if (actualStyleValue == "")
+        {
+            throw new AssertException($"Style not found. Style name: {styleName}");
+        }
+
+        if (string.Compare(actualStyleValue, expectedStyleValue) != 0)
+        {
+            throw new AssertException($@"
+HaveComputedStyle Assert Exception
+Style name: {styleName}
+Expected style value: {expectedStyleValue}
+Actual style value: {actualStyleValue}
+Because: {because}
+");
+        }
+
+        return locator.Value;
+    }
 }

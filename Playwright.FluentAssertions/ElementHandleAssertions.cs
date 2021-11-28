@@ -42,12 +42,12 @@ public static partial class ElementHandleAssertions
         var element = elementHandle.Value;
         var isChecked = element.IsChecked();
 
-        if (!isChecked)
+        if (isChecked is false)
         {
             throw new AssertException(@$"
 BeChecked Assert Exception
-Actual: not checked
 Expected: checked
+Actual: not checked
 Because: {because}
 ");
         }
@@ -62,12 +62,12 @@ Because: {because}
         var element = elementHandle.Value;
         var isChecked = element.IsChecked();
 
-        if (isChecked)
+        if (isChecked is true)
         {
             throw new AssertException(@$"
 BeNotChecked Assert Exception
-Actual: checked
 Expected: not checked
+Actual: checked
 Because: {because}
 ");
         }
@@ -82,12 +82,12 @@ Because: {because}
         var element = elementHandle.Value;
         var isDisabled = element.IsDisabled();
 
-        if (!isDisabled)
+        if (isDisabled is false)
         {
             throw new AssertException(@$"
 BeDisabled Assert Exception
-Actual: not disabled
 Expected: disabled
+Actual: not disabled
 Because: {because}
 ");
         }
@@ -102,12 +102,12 @@ Because: {because}
         var element = elementHandle.Value;
         var isDisabled = element.IsDisabled();
 
-        if (isDisabled)
+        if (isDisabled is true)
         {
             throw new AssertException(@$"
 BeNotDisabled Assert Exception
-Actual: disabled
 Expected: not disabled
+Actual: disabled
 Because: {because}
 ");
         }
@@ -122,12 +122,12 @@ Because: {because}
         var element = elementHandle.Value;
         var isEditable = element.IsEditable();
 
-        if (!isEditable)
+        if (isEditable is false)
         {
             throw new AssertException(@$"
 BeEditable Assert Exception
-Actual: not editable
 Expected: editable
+Actual: not editable
 Because: {because}
 ");
         }
@@ -142,12 +142,12 @@ Because: {because}
         var element = elementHandle.Value;
         var isEditable = element.IsEditable();
 
-        if (isEditable)
+        if (isEditable is true)
         {
             throw new AssertException(@$"
 BeNotEditable Assert Exception
-Actual: editable
 Expected: not editable
+Actual: editable
 Because: {because}
 ");
         }
@@ -162,12 +162,12 @@ Because: {because}
         var element = elementHandle.Value;
         var isEnabled = element.IsEnabled();
 
-        if (!isEnabled)
+        if (isEnabled is false)
         {
             throw new AssertException(@$"
 BeEnabled Assert Exception
-Actual: not enabled
 Expected: enabled
+Actual: not enabled
 Because: {because}
 ");
         }
@@ -182,12 +182,12 @@ Because: {because}
         var element = elementHandle.Value;
         var isEnabled = element.IsEnabled();
 
-        if (isEnabled)
+        if (isEnabled is true)
         {
             throw new AssertException(@$"
 BeNotEnabled Assert Exception
-Actual: enabled
 Expected: not enabled
+Actual: enabled
 Because: {because}
 ");
         }
@@ -202,12 +202,12 @@ Because: {because}
         var element = elementHandle.Value;
         var isHidden = element.IsHidden();
 
-        if (!isHidden)
+        if (isHidden is false)
         {
             throw new AssertException(@$"
 BeHidden Assert Exception
-Actual: not hidden
 Expected: hidden
+Actual: not hidden
 Because: {because}
 ");
         }
@@ -222,12 +222,12 @@ Because: {because}
         var element = elementHandle.Value;
         var isHidden = element.IsHidden();
 
-        if (isHidden)
+        if (isHidden is true)
         {
             throw new AssertException(@$"
 BeNotHidden Assert Exception
-Actual: hidden
 Expected: not hidden
+Actual: hidden
 Because: {because}
 ");
         }
@@ -242,12 +242,12 @@ Because: {because}
         var element = elementHandle.Value;
         var isVisible = element.IsVisible();
 
-        if (!isVisible)
+        if (isVisible is false)
         {
             throw new AssertException(@$"
 BeVisible Assert Exception
-Actual: not visible
 Expected: visible
+Actual: not visible
 Because: {because}
 ");
         }
@@ -262,12 +262,12 @@ Because: {because}
         var element = elementHandle.Value;
         var isVisible = element.IsVisible();
 
-        if (isVisible)
+        if (isVisible is true)
         {
             throw new AssertException(@$"
 BeNotVisible Assert Exception
-Actual: visible
 Expected: not visible
+Actual: visible
 Because: {because}
 ");
         }
@@ -284,10 +284,10 @@ Because: {because}
         var textContent = element.TextContent() ?? "";
         var match = Regex.Match(textContent, pattern, RegexOptions.Compiled);
 
-        if (!match.Success)
+        if (match.Success is false)
         {
             throw new AssertException(@$"
-BeTextContent Assert Exception
+HaveTextContent Assert Exception
 Actual text content: {textContent}
 Expected pattern: {pattern}
 Because: {because}
@@ -306,10 +306,10 @@ Because: {because}
         var textContent = element.TextContent() ?? "";
         var match = Regex.Match(textContent, pattern, RegexOptions.Compiled);
 
-        if (match.Success)
+        if (match.Success is true)
         {
             throw new AssertException(@$"
-BeNotTextContent Assert Exception
+HaveNotTextContent Assert Exception
 Actual text content: {textContent}
 Not expected pattern: {pattern}
 Because: {because}
@@ -328,10 +328,10 @@ Because: {because}
         var innerHTML = element.InnerHTML() ?? "";
         var match = Regex.Match(innerHTML, pattern, RegexOptions.Compiled);
 
-        if (!match.Success)
+        if (match.Success is false)
         {
             throw new AssertException(@$"
-BeInnerHTML Assert Exception
+HaveInnerHTML Assert Exception
 Actual inner html: {innerHTML}
 Expected pattern: {pattern}
 Because: {because}
@@ -350,10 +350,10 @@ Because: {because}
         var innerHTML = element.InnerHTML() ?? "";
         var match = Regex.Match(innerHTML, pattern, RegexOptions.Compiled);
 
-        if (match.Success)
+        if (match.Success is true)
         {
             throw new AssertException(@$"
-BeNotInnerHTML Assert Exception
+HaveNotInnerHTML Assert Exception
 Actual inner html: {innerHTML}
 Not expected pattern: {pattern}
 Because: {because}
@@ -372,10 +372,10 @@ Because: {because}
         var innerText = element.InnerText() ?? "";
         var match = Regex.Match(innerText, pattern, RegexOptions.Compiled);
 
-        if (!match.Success)
+        if (match.Success is false)
         {
             throw new AssertException(@$"
-BeInnerText Assert Exception
+HaveInnerText Assert Exception
 Actual inner html: {innerText}
 Expected pattern: {pattern}
 Because: {because}
@@ -394,10 +394,10 @@ Because: {because}
         var innerText = element.InnerText() ?? "";
         var match = Regex.Match(innerText, pattern, RegexOptions.Compiled);
 
-        if (match.Success)
+        if (match.Success is true)
         {
             throw new AssertException(@$"
-BeNotInnerText Assert Exception
+HaveNotInnerText Assert Exception
 Actual inner text: {innerText}
 Not expected pattern: {pattern}
 Because: {because}
@@ -416,10 +416,10 @@ Because: {because}
         var inputValue = element.InputValue() ?? "";
         var match = Regex.Match(inputValue, pattern, RegexOptions.Compiled);
 
-        if (!match.Success)
+        if (match.Success is false)
         {
             throw new AssertException(@$"
-BeInputValue Assert Exception
+HaveInputValue Assert Exception
 Actual input value: {inputValue}
 Expected pattern: {pattern}
 Because: {because}
@@ -438,10 +438,10 @@ Because: {because}
         var inputValue = element.InputValue() ?? "";
         var match = Regex.Match(inputValue, pattern, RegexOptions.Compiled);
 
-        if (match.Success)
+        if (match.Success is true)
         {
             throw new AssertException(@$"
-BeNotInputValue Assert Exception
+HaveNotInputValue Assert Exception
 Actual input value: {inputValue}
 Not expected pattern: {pattern}
 Because: {because}
@@ -457,12 +457,15 @@ Because: {because}
         string because = "no reason given")
     {
         var element = elementHandle.Value;
-        var attribute = element.GetAttribute(attributeName);
 
-        if (attribute is null)
+        try
+        {
+            element.GetAttribute(attributeName);
+        }
+        catch
         {
             throw new AssertException(@$"
-BeAttribute Assert Exception
+HaveAttribute Assert Exception
 Expected attribute: {attributeName}
 Because: {because}
 ");
@@ -477,35 +480,48 @@ Because: {because}
         string because = "no reason given")
     {
         var element = elementHandle.Value;
-        var attribute = element.GetAttribute(attributeName);
 
-        if (attribute is not null)
+        try
         {
-            throw new AssertException(@$"
-BeNotAttribute Assert Exception
+            element.GetAttribute(attributeName);
+        }
+        catch 
+        {
+            return elementHandle.Value;
+        }
+
+        throw new AssertException(@$"
+HaveNotAttribute Assert Exception
 Not expected attribute: {attributeName}
 Because: {because}
 ");
-        }
-
-        return element;
     }
 
     public static IElementHandle HaveAttributeValue(
         this ReferenceTypeAssertion<IElementHandle> elementHandle,
         string attributeName,
-        string attributeValue,
+        string expectedAttributeValue,
         string because = "no reason given")
     {
         var element = elementHandle.Value;
-        var attribute = element.GetAttribute(attributeName);
+        string? actualAttributeValue = null;
 
-        if (attribute is null || string.Compare(attribute, attributeValue) != 0)
+        try
+        {
+            actualAttributeValue = element.GetAttribute(attributeName) ?? "";
+        }
+        catch
+        {
+            throw new AssertException($"Attribute not found. Attibute name: {attributeName}");
+        }
+
+        if (string.Compare(actualAttributeValue, expectedAttributeValue) != 0)
         {
             throw new AssertException(@$"
-BeAttributeValue Assert Exception
-Expected attribute: {attributeName}
-Expected attribute value: {attributeValue}
+HaveAttributeValue Assert Exception
+Attribute name: {attributeName}
+Expected attribute value: {expectedAttributeValue}
+Actual attribute value: {actualAttributeValue}
 Because: {because}
 ");
         }
@@ -520,16 +536,20 @@ Because: {because}
         string because = "no reason given")
     {
         var element = elementHandle.Value;
-        var actualStylevalue = element.Evaluate($"e => getComputedStyle(e).{styleName}", element).ToString();
-        if (actualStylevalue is null) throw new AssertException($"Style not found. Style name: {styleName}");
+        var actualStyleValue = element.Evaluate($"e => getComputedStyle(e).{styleName}", element).ToString();
 
-        if (string.Compare(actualStylevalue, expectedStyleValue) != 0)
+        if (actualStyleValue == "")
+        {
+            throw new AssertException($"Style not found. Style name: {styleName}");
+        }
+
+        if (string.Compare(actualStyleValue, expectedStyleValue) != 0)
         {
             throw new AssertException($@"
 HaveComputedStyle Assert Exception
 Style name: {styleName}
 Expected style value: {expectedStyleValue}
-Actual style value: {actualStylevalue}
+Actual style value: {actualStyleValue}
 Because: {because}
 ");
         }

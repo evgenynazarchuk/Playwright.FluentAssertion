@@ -643,11 +643,13 @@ Because: {because}
         FrameQuerySelectorOptions? options = null)
     {
         var element = frame.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
+        if (element is null) throw new AssertException($"Element not found. Selector: {selector}");
 
-        var attribute = element.GetAttribute(attributeName);
-
-        if (attribute is null)
+        try
+        {
+            element.GetAttribute(attributeName);
+        }
+        catch
         {
             throw new AssertException(@$"
 HaveElementAttribute Assert Exception
@@ -668,16 +670,54 @@ Because: {because}
         FrameQuerySelectorOptions? options = null)
     {
         var element = frame.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
+        if (element is null) throw new AssertException($"Element not found. Selector: {selector}");
 
-        var attributeValue = element.GetAttribute(attributeName);
-
-        if (attributeValue is not null)
+        try
         {
-            throw new AssertException(@$"
+            element.GetAttribute(attributeName);
+        }
+        catch
+        {
+            return frame.Value;
+        }
+
+        throw new AssertException(@$"
 HaveNotElementAttribute Assert Exception
 Selector: {selector}
 Not expected attribute: {attributeName}
+Because: {because}
+");
+    }
+
+    public static IFrame HaveElementAttributeValue(
+        this ReferenceTypeAssertion<IFrame> frame,
+        string selector,
+        string attributeName,
+        string expectedAttributeValue,
+        string because = "no reason given",
+        FrameQuerySelectorOptions? options = null)
+    {
+        var element = frame.Value.QuerySelector(selector, options);
+        if (element is null) throw new AssertException($"Element not found. Selector: {selector}");
+        string? actualAttributeValue = null;
+
+        try
+        {
+            actualAttributeValue = element.GetAttribute(attributeName) ?? "";
+        }
+        catch
+        {
+            throw new AssertException($"Attribute not found. Attibute name: {attributeName}");
+        }
+
+        if (string.Compare(actualAttributeValue, expectedAttributeValue) != 0)
+        {
+            throw new AssertException(@$"
+HaveElementAttributeValue Assert Exception
+Selector: {selector}
+Expected attribute: {attributeName}
+Expected attribute value: {expectedAttributeValue}
+Actual attribute value: {actualAttributeValue}
 Because: {because}
 ");
         }
@@ -685,26 +725,31 @@ Because: {because}
         return frame.Value;
     }
 
-    public static IFrame HaveElementAttributeValue(
+    public static IFrame HaveElementComputedStyle(
         this ReferenceTypeAssertion<IFrame> frame,
         string selector,
-        string attributeName,
-        string attributeValue,
+        string styleName,
+        string expectedStyleValue,
         string because = "no reason given",
         FrameQuerySelectorOptions? options = null)
     {
         var element = frame.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
+        if (element is null) throw new AssertException($"Element not found. Selector: {selector}");
+        var actualStyleValue = element.Evaluate($"e => getComputedStyle(e).{styleName}", element).ToString();
 
-        var value = element.GetAttribute(attributeName);
-
-        if (value is null && string.Compare(value, attributeValue) != 0)
+        if (actualStyleValue == "")
         {
-            throw new AssertException(@$"
-HaveElementAttributeValue Assert Exception
+            throw new AssertException($"Style not found. Style name: {styleName}");
+        }
+
+        if (string.Compare(actualStyleValue, expectedStyleValue) != 0)
+        {
+            throw new AssertException($@"
+HaveComputedStyle Assert Exception
 Selector: {selector}
-Expected attribute: {attributeName}
-Expected attribute value: {attributeValue}
+Style name: {styleName}
+Expected style value: {expectedStyleValue}
+Actual style value: {actualStyleValue}
 Because: {because}
 ");
         }
