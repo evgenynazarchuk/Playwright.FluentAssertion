@@ -47,9 +47,9 @@ public static class PageAssertions
             throw new AssertException(@$"
 HaveTitle Assert Exception
 Expected title:
-{title}
-Actual title:
 {expectedTitle}
+Actual title:
+{title}
 Because: {because}
 ");
         }
