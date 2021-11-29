@@ -30,8 +30,10 @@ public static class PrimitiveAssertions
         {
             throw new AssertException($@"
 Be Assert Exception
-Expected string:\n{expectedString}
-Actual string:\n{actualString}
+Expected string:
+{expectedString}
+Actual string:
+{actualString}
 Because: {because}
 ");
         }
@@ -56,8 +58,10 @@ Because: {because}
                 throw new AssertException($@"
 Be Assert Exception
 Index string: {i}
-Expected string:\n{expectedStrings.ElementAt(i)}
-Actual string:\n{actualStrings.Value.ElementAt(i)}
+Expected string:
+{expectedStrings.ElementAt(i)}
+Actual string:
+{actualStrings.Value.ElementAt(i)}
 Because: {because}
 ");
             }

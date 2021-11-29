@@ -287,8 +287,10 @@ Because: {because}
         {
             throw new AssertException(@$"
 HaveTextContent Assert Exception
-Actual text content:\n{textContent}
-Expected text content:\n{expectedTextContent}
+Actual text content:
+{textContent}
+Expected text content:
+{expectedTextContent}
 Because: {because}
 ");
         }
@@ -309,8 +311,10 @@ Because: {because}
         {
             throw new AssertException(@$"
 HaveNotTextContent Assert Exception
-Actual text content:\n{textContent}
-Regular expression:\n{regularExpression}
+Actual text content:
+{textContent}
+Regular expression:
+{regularExpression}
 Because: {because}
 ");
         }
@@ -330,8 +334,10 @@ Because: {because}
         {
             throw new AssertException(@$"
 HaveInnerHTML Assert Exception
-Actual inner html:\n{innerHTML}
-Expected inner html:\n{expectedInnerText}
+Actual inner html:
+{innerHTML}
+Expected inner html:
+{expectedInnerText}
 Because: {because}
 ");
         }
@@ -352,8 +358,10 @@ Because: {because}
         {
             throw new AssertException(@$"
 HaveNotInnerHTML Assert Exception
-Actual inner html:\n{innerHTML}
-Regular expression:\n{regularExpression}
+Actual inner html:
+{innerHTML}
+Regular expression:
+{regularExpression}
 Because: {because}
 ");
         }
@@ -373,8 +381,10 @@ Because: {because}
         {
             throw new AssertException(@$"
 HaveInnerText Assert Exception
-Actual inner text:\n{innerText}
-Expected inner text:\n{expectedInnerText}
+Actual inner text:
+{innerText}
+Expected inner text:
+{expectedInnerText}
 Because: {because}
 ");
         }
@@ -395,8 +405,10 @@ Because: {because}
         {
             throw new AssertException(@$"
 HaveNotInnerText Assert Exception
-Actual inner text:\n{innerText}
-Regular expression:\n{regularExpression}
+Actual inner text:
+{innerText}
+Regular expression:
+{regularExpression}
 Because: {because}
 ");
         }
@@ -416,8 +428,10 @@ Because: {because}
         {
             throw new AssertException(@$"
 HaveInputValue Assert Exception
-Actual input value:\n{inputValue}
-Expected input value:\n{expectedInputValue}
+Actual input value:
+{inputValue}
+Expected input value:
+{expectedInputValue}
 Because: {because}
 ");
         }
@@ -438,8 +452,10 @@ Because: {because}
         {
             throw new AssertException(@$"
 HaveNotInputValue Assert Exception
-Actual input value:\n{inputValue}
-Regular expression:\n{regularExpression}
+Actual input value:
+{inputValue}
+Regular expression:
+{regularExpression}
 Because: {because}
 ");
         }

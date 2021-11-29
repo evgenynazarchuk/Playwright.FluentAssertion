@@ -46,8 +46,10 @@ public static class FrameAssertions
         {
             throw new AssertException(@$"
 HaveTitle Assert Exception
-Actual title:\n{title}
-Expected title:\n{expecteTitle}
+Actual title:
+{title}
+Expected title:
+{expecteTitle}
 Because: {because}
 ");
         }
@@ -67,8 +69,10 @@ Because: {because}
         {
             throw new AssertException(@$"
 HaveNotTitle Assert Exception
-Actual title:\n{title}
-Regulat expression:\n{regularExpression}
+Actual title:
+{title}
+Regulat expression:
+{regularExpression}
 Because: {because}
 ");
         }
@@ -88,8 +92,10 @@ Because: {because}
         {
             throw new AssertException(@$"
 HaveContent Assert Exception
-Actual content:\n{content}
-Expected pattern:\n{regularExpression}
+Actual content:
+{content}
+Expected pattern:
+{regularExpression}
 Because: {because}
 ");
         }
@@ -109,8 +115,10 @@ Because: {because}
         {
             throw new AssertException(@$"
 HaveNotContent Assert Exception
-Actual content:\n{content}
-Regular expression:\n{regularExpression}
+Actual content:
+{content}
+Regular expression:
+{regularExpression}
 Because: {because}
 ");
         }
@@ -435,8 +443,10 @@ Because: {because}
             throw new AssertException(@$"
 HaveElementTextContent Assert Exception
 Selector: {selector}
-Actual text content:\n{textContent}
-Expected text content:\n{expectedTextContent}
+Actual text content:
+{textContent}
+Expected text content:
+{expectedTextContent}
 Because: {because}
 ");
         }
@@ -462,8 +472,10 @@ Because: {because}
             throw new AssertException(@$"
 HaveNotElementTextContent Assert Exception
 Selector: {selector}
-Actual text content:\n{textContent}
-Regular expression:\n{regularExpression}
+Actual text content:
+{textContent}
+Regular expression:
+{regularExpression}
 Because: {because}
 ");
         }
@@ -488,8 +500,10 @@ Because: {because}
             throw new AssertException(@$"
 HaveElementInnerHTML Assert Exception
 Selector: {selector}
-Actual inner html:\n{innerHtml}
-Expected inner html:\n{expectedInnerHtml}
+Actual inner html:
+{innerHtml}
+Expected inner html:
+{expectedInnerHtml}
 Because: {because}
 ");
         }
@@ -515,8 +529,10 @@ Because: {because}
             throw new AssertException(@$"
 HaveNotElementInnerHTML Assert Exception
 Selector: {selector}
-Actual inner html:\n{innerHtml}
-Regular expression:\n{regularExpression}
+Actual inner html:
+{innerHtml}
+Regular expression:
+{regularExpression}
 Because: {because}
 ");
         }
@@ -541,8 +557,10 @@ Because: {because}
             throw new AssertException(@$"
 HaveElementInnerText Assert Exception
 Selector: {selector}
-Actual inner text:\n{innerHtml}
-Expected inner text:\n{expectedInnerText}
+Actual inner text:
+{innerHtml}
+Expected inner text:
+{expectedInnerText}
 Because: {because}
 ");
         }
@@ -568,8 +586,10 @@ Because: {because}
             throw new AssertException(@$"
 HaveNotElementInnerText Assert Exception
 Selector: {selector}
-Actual inner text:\n{innerText}
-Regular expression:\n{regularExpression}
+Actual inner text:
+{innerText}
+Regular expression:
+{regularExpression}
 Because: {because}
 ");
         }
@@ -594,8 +614,10 @@ Because: {because}
             throw new AssertException(@$"
 HaveElementInputValue Assert Exception
 Selector: {selector}
-Actual input value:\n{inputValue}
-Expected input value:\n{expectedInputValue}
+Actual input value:
+{inputValue}
+Expected input value:
+{expectedInputValue}
 Because: {because}
 ");
         }
@@ -621,8 +643,10 @@ Because: {because}
             throw new AssertException(@$"
 HaveNotElementInputValue Assert Exception
 Selector: {selector}
-Actual input value:\n{inputValue}
-Regular expression:\n{regularExpression}
+Actual input value:
+{inputValue}
+Regular expression:
+{regularExpression}
 Because: {because}
 ");
         }
