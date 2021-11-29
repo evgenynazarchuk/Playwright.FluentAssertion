@@ -258,19 +258,18 @@ Because: {because}
 
     public static ILocator HaveTextContent(
         this ReferenceTypeAssertion<ILocator> locator,
-        string pattern,
+        string expectedTextContent,
         string because = "no reason given")
     {
         var element = locator.Value;
         var textContent = element.TextContent() ?? "";
-        var match = Regex.Match(textContent, pattern, RegexOptions.Compiled);
 
-        if (!match.Success)
+        if (string.Compare(textContent, expectedTextContent) != 0)
         {
             throw new AssertException(@$"
 BeTextContent Assert Exception
-Actual text content: {textContent}
-Expected pattern: {pattern}
+Actual text content:\n{textContent}
+Expected text content:\n{expectedTextContent}
 Because: {because}
 ");
         }
@@ -280,19 +279,19 @@ Because: {because}
 
     public static ILocator HaveNotTextContent(
         this ReferenceTypeAssertion<ILocator> locator,
-        string pattern,
+        string regularExpression,
         string because = "no reason given")
     {
         var element = locator.Value;
         var textContent = element.TextContent() ?? "";
-        var match = Regex.Match(textContent, pattern, RegexOptions.Compiled);
+        var match = Regex.Match(textContent, regularExpression, RegexOptions.Compiled);
 
         if (match.Success)
         {
             throw new AssertException(@$"
 BeNotTextContent Assert Exception
-Actual text content: {textContent}
-Not expected pattern: {pattern}
+Actual text content:\n{textContent}
+Regular expression:\n{regularExpression}
 Because: {because}
 ");
         }
@@ -302,19 +301,18 @@ Because: {because}
 
     public static ILocator HaveInnerHTML(
         this ReferenceTypeAssertion<ILocator> locator,
-        string pattern,
+        string expectedInnerHtml,
         string because = "no reason given")
     {
         var element = locator.Value;
         var innerHTML = element.InnerHTML() ?? "";
-        var match = Regex.Match(innerHTML, pattern, RegexOptions.Compiled);
 
-        if (!match.Success)
+        if (string.Compare(innerHTML, expectedInnerHtml) != 0)
         {
             throw new AssertException(@$"
 BeInnerHTML Assert Exception
-Actual inner html: {innerHTML}
-Expected pattern: {pattern}
+Actual inner html:\n{innerHTML}
+Expected inner html:\n{expectedInnerHtml}
 Because: {because}
 ");
         }
@@ -324,19 +322,19 @@ Because: {because}
 
     public static ILocator HaveNotInnerHTML(
         this ReferenceTypeAssertion<ILocator> locator,
-        string pattern,
+        string regularExpression,
         string because = "no reason given")
     {
         var element = locator.Value;
         var innerHTML = element.InnerHTML() ?? "";
-        var match = Regex.Match(innerHTML, pattern, RegexOptions.Compiled);
+        var match = Regex.Match(innerHTML, regularExpression, RegexOptions.Compiled);
 
         if (match.Success)
         {
             throw new AssertException(@$"
 BeNotInnerHTML Assert Exception
-Actual inner html: {innerHTML}
-Not expected pattern: {pattern}
+Actual inner html:\n{innerHTML}
+Regular expression:\n{regularExpression}
 Because: {because}
 ");
         }
@@ -346,19 +344,18 @@ Because: {because}
 
     public static ILocator HaveInnerText(
         this ReferenceTypeAssertion<ILocator> locator,
-        string pattern,
+        string expectedInnerText,
         string because = "no reason given")
     {
         var element = locator.Value;
         var innerText = element.InnerText() ?? "";
-        var match = Regex.Match(innerText, pattern, RegexOptions.Compiled);
 
-        if (!match.Success)
+        if (string.Compare(innerText, expectedInnerText) != 0)
         {
             throw new AssertException(@$"
 BeInnerText Assert Exception
-Actual inner text: {innerText}
-Expected pattern: {pattern}
+Actual inner text:\n{innerText}
+Expected inner text:\n{expectedInnerText}
 Because: {because}
 ");
         }
@@ -368,19 +365,19 @@ Because: {because}
 
     public static ILocator HaveNotInnerText(
         this ReferenceTypeAssertion<ILocator> locator,
-        string pattern,
+        string regularExpression,
         string because = "no reason given")
     {
         var element = locator.Value;
         var innerText = element.InnerText() ?? "";
-        var match = Regex.Match(innerText, pattern, RegexOptions.Compiled);
+        var match = Regex.Match(innerText, regularExpression, RegexOptions.Compiled);
 
         if (match.Success)
         {
             throw new AssertException(@$"
 BeNotInnerText Assert Exception
-Actual inner text: {innerText}
-Not expected pattern: {pattern}
+Actual inner text:\n{innerText}
+Regular expression:\n{regularExpression}
 Because: {because}
 ");
         }
@@ -390,19 +387,18 @@ Because: {because}
 
     public static ILocator HaveInputValue(
         this ReferenceTypeAssertion<ILocator> locator,
-        string pattern,
+        string expectedInputValue,
         string because = "no reason given")
     {
         var element = locator.Value;
         var inputValue = element.InputValue() ?? "";
-        var match = Regex.Match(inputValue, pattern, RegexOptions.Compiled);
 
-        if (!match.Success)
+        if (string.Compare(inputValue, expectedInputValue) != 0)
         {
             throw new AssertException(@$"
 BeInputValue Assert Exception
-Actual input value: {inputValue}
-Expected pattern: {pattern}
+Actual input value:\n{inputValue}
+Expected input value:\n{expectedInputValue}
 Because: {because}
 ");
         }
@@ -412,19 +408,19 @@ Because: {because}
 
     public static ILocator HaveNotInputValue(
         this ReferenceTypeAssertion<ILocator> locator,
-        string pattern,
+        string regularExpression,
         string because = "no reason given")
     {
         var element = locator.Value;
         var inputValue = element.InputValue() ?? "";
-        var match = Regex.Match(inputValue, pattern, RegexOptions.Compiled);
+        var match = Regex.Match(inputValue, regularExpression, RegexOptions.Compiled);
 
         if (match.Success)
         {
             throw new AssertException(@$"
 BeNotInputValue Assert Exception
-Actual input value: {inputValue}
-Not expected pattern: {pattern}
+Actual input value:\n{inputValue}
+Regular expression:\n{regularExpression}
 Because: {because}
 ");
         }

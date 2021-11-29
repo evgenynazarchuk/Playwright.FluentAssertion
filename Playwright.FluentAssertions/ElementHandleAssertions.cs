@@ -277,19 +277,18 @@ Because: {because}
 
     public static IElementHandle HaveTextContent(
         this ReferenceTypeAssertion<IElementHandle> elementHandle,
-        string pattern,
+        string expectedTextContent,
         string because = "no reason given")
     {
         var element = elementHandle.Value;
         var textContent = element.TextContent() ?? "";
-        var match = Regex.Match(textContent, pattern, RegexOptions.Compiled);
 
-        if (match.Success is false)
+        if (string.Compare(textContent, expectedTextContent) != 0)
         {
             throw new AssertException(@$"
 HaveTextContent Assert Exception
-Actual text content: {textContent}
-Expected pattern: {pattern}
+Actual text content:\n{textContent}
+Expected text content:\n{expectedTextContent}
 Because: {because}
 ");
         }
@@ -299,19 +298,19 @@ Because: {because}
 
     public static IElementHandle HaveNotTextContent(
         this ReferenceTypeAssertion<IElementHandle> elementHandle,
-        string pattern,
+        string regularExpression,
         string because = "no reason given")
     {
         var element = elementHandle.Value;
         var textContent = element.TextContent() ?? "";
-        var match = Regex.Match(textContent, pattern, RegexOptions.Compiled);
+        var match = Regex.Match(textContent, regularExpression, RegexOptions.Compiled);
 
         if (match.Success is true)
         {
             throw new AssertException(@$"
 HaveNotTextContent Assert Exception
-Actual text content: {textContent}
-Not expected pattern: {pattern}
+Actual text content:\n{textContent}
+Regular expression:\n{regularExpression}
 Because: {because}
 ");
         }
@@ -321,19 +320,18 @@ Because: {because}
 
     public static IElementHandle HaveInnerHTML(
         this ReferenceTypeAssertion<IElementHandle> elementHandle,
-        string pattern,
+        string expectedInnerText,
         string because = "no reason given")
     {
         var element = elementHandle.Value;
         var innerHTML = element.InnerHTML() ?? "";
-        var match = Regex.Match(innerHTML, pattern, RegexOptions.Compiled);
 
-        if (match.Success is false)
+        if (string.Compare(innerHTML, expectedInnerText) != 0)
         {
             throw new AssertException(@$"
 HaveInnerHTML Assert Exception
-Actual inner html: {innerHTML}
-Expected pattern: {pattern}
+Actual inner html:\n{innerHTML}
+Expected inner html:\n{expectedInnerText}
 Because: {because}
 ");
         }
@@ -343,19 +341,19 @@ Because: {because}
 
     public static IElementHandle HaveNotInnerHTML(
         this ReferenceTypeAssertion<IElementHandle> elementHandle,
-        string pattern,
+        string regularExpression,
         string because = "no reason given")
     {
         var element = elementHandle.Value;
         var innerHTML = element.InnerHTML() ?? "";
-        var match = Regex.Match(innerHTML, pattern, RegexOptions.Compiled);
+        var match = Regex.Match(innerHTML, regularExpression, RegexOptions.Compiled);
 
         if (match.Success is true)
         {
             throw new AssertException(@$"
 HaveNotInnerHTML Assert Exception
-Actual inner html: {innerHTML}
-Not expected pattern: {pattern}
+Actual inner html:\n{innerHTML}
+Regular expression:\n{regularExpression}
 Because: {because}
 ");
         }
@@ -365,19 +363,18 @@ Because: {because}
 
     public static IElementHandle HaveInnerText(
         this ReferenceTypeAssertion<IElementHandle> elementHandle,
-        string pattern,
+        string expectedInnerText,
         string because = "no reason given")
     {
         var element = elementHandle.Value;
         var innerText = element.InnerText() ?? "";
-        var match = Regex.Match(innerText, pattern, RegexOptions.Compiled);
 
-        if (match.Success is false)
+        if (string.Compare(innerText, expectedInnerText) != 0)
         {
             throw new AssertException(@$"
 HaveInnerText Assert Exception
-Actual inner html: {innerText}
-Expected pattern: {pattern}
+Actual inner text:\n{innerText}
+Expected inner text:\n{expectedInnerText}
 Because: {because}
 ");
         }
@@ -387,19 +384,19 @@ Because: {because}
 
     public static IElementHandle HaveNotInnerText(
         this ReferenceTypeAssertion<IElementHandle> elementHandle,
-        string pattern,
+        string regularExpression,
         string because = "no reason given")
     {
         var element = elementHandle.Value;
         var innerText = element.InnerText() ?? "";
-        var match = Regex.Match(innerText, pattern, RegexOptions.Compiled);
+        var match = Regex.Match(innerText, regularExpression, RegexOptions.Compiled);
 
         if (match.Success is true)
         {
             throw new AssertException(@$"
 HaveNotInnerText Assert Exception
-Actual inner text: {innerText}
-Not expected pattern: {pattern}
+Actual inner text:\n{innerText}
+Regular expression:\n{regularExpression}
 Because: {because}
 ");
         }
@@ -409,19 +406,18 @@ Because: {because}
 
     public static IElementHandle HaveInputValue(
         this ReferenceTypeAssertion<IElementHandle> elementHandle,
-        string pattern,
+        string expectedInputValue,
         string because = "no reason given")
     {
         var element = elementHandle.Value;
         var inputValue = element.InputValue() ?? "";
-        var match = Regex.Match(inputValue, pattern, RegexOptions.Compiled);
 
-        if (match.Success is false)
+        if (string.Compare(inputValue, expectedInputValue) != 0)
         {
             throw new AssertException(@$"
 HaveInputValue Assert Exception
-Actual input value: {inputValue}
-Expected pattern: {pattern}
+Actual input value:\n{inputValue}
+Expected input value:\n{expectedInputValue}
 Because: {because}
 ");
         }
@@ -431,19 +427,19 @@ Because: {because}
 
     public static IElementHandle HaveNotInputValue(
         this ReferenceTypeAssertion<IElementHandle> elementHandle,
-        string pattern,
+        string regularExpression,
         string because = "no reason given")
     {
         var element = elementHandle.Value;
         var inputValue = element.InputValue() ?? "";
-        var match = Regex.Match(inputValue, pattern, RegexOptions.Compiled);
+        var match = Regex.Match(inputValue, regularExpression, RegexOptions.Compiled);
 
         if (match.Success is true)
         {
             throw new AssertException(@$"
 HaveNotInputValue Assert Exception
-Actual input value: {inputValue}
-Not expected pattern: {pattern}
+Actual input value:\n{inputValue}
+Regular expression:\n{regularExpression}
 Because: {because}
 ");
         }

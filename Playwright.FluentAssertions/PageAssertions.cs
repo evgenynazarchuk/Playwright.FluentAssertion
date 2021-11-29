@@ -37,18 +37,17 @@ public static class PageAssertions
 
     public static IPage HaveTitle(
         this ReferenceTypeAssertion<IPage> page,
-        string pattern,
+        string expectedTitle,
         string because = "no reason given")
     {
         var title = page.Value.Title();
-        var match = Regex.Match(title, pattern, RegexOptions.Compiled);
 
-        if (!match.Success)
+        if (string.Compare(title, expectedTitle) != 0)
         {
             throw new AssertException(@$"
 HaveTitle Assert Exception
-Expected: {title}
-Actual: {pattern}
+Expected title:\n{title}
+Actual title:\n{expectedTitle}
 Because: {because}
 ");
         }
@@ -58,18 +57,18 @@ Because: {because}
 
     public static IPage HaveNotTitle(
         this ReferenceTypeAssertion<IPage> page,
-        string pattern,
+        string regularExpression,
         string because = "no reason given")
     {
         var title = page.Value.Title();
-        var match = Regex.Match(title, pattern, RegexOptions.Compiled);
+        var match = Regex.Match(title, regularExpression, RegexOptions.Compiled);
 
         if (match.Success)
         {
             throw new AssertException(@$"
 HaveNotTitle Assert Exception
-Actual: {title}
-Not expected pattern: {pattern}
+Actual title:\n{title}
+Regular expression:\n{regularExpression}
 Because: {because}
 ");
         }
@@ -79,18 +78,18 @@ Because: {because}
 
     public static IPage HaveContent(
         this ReferenceTypeAssertion<IPage> page,
-        string pattern,
+        string regularExpression,
         string because = "no reason given")
     {
         var content = page.Value.Content();
-        var match = Regex.Match(content, pattern, RegexOptions.Compiled);
+        var match = Regex.Match(content, regularExpression, RegexOptions.Compiled);
 
         if (!match.Success)
         {
             throw new AssertException(@$"
 HaveContent Assert Exception
-Actual: {content}
-Expected pattern: {pattern}
+Actual content:\n{content}
+Regular expression:\n{regularExpression}
 Because: {because}
 ");
         }
@@ -110,8 +109,8 @@ Because: {because}
         {
             throw new AssertException(@$"
 HaveNotContent Assert Exception
-Actual: {content}
-Not expected pattern: {pattern}
+Actual content:\n{content}
+Not expected pattern:\n{pattern}
 Because: {because}
 ");
         }
@@ -422,7 +421,7 @@ Because: {because}
     public static IPage HaveElementTextContent(
         this ReferenceTypeAssertion<IPage> page,
         string selector,
-        string pattern,
+        string expectedTextContent,
         string because = "no reason given",
         PageQuerySelectorOptions? options = null)
     {
@@ -430,15 +429,14 @@ Because: {because}
         if (element is null) throw new AssertException($"Element not found. Selector {selector}");
 
         var textContent = element.TextContent() ?? "";
-        var match = Regex.Match(textContent, pattern, RegexOptions.Compiled);
 
-        if (!match.Success)
+        if (string.Compare(textContent, expectedTextContent) != 0)
         {
             throw new AssertException(@$"
 HaveElementTextContent Assert Exception
 Selector: {selector}
-Actual text content: {textContent}
-Expected pattern: {pattern}
+Actual text content:\n{textContent}
+Expected text content:\n{expectedTextContent}
 Because: {because}
 ");
         }
@@ -449,7 +447,7 @@ Because: {because}
     public static IPage HaveNotElementTextContent(
         this ReferenceTypeAssertion<IPage> page,
         string selector,
-        string pattern,
+        string regularExpression,
         string because = "no reason given",
         PageQuerySelectorOptions? options = null)
     {
@@ -457,15 +455,15 @@ Because: {because}
         if (element is null) throw new AssertException($"Element not found. Selector {selector}");
 
         var textContent = element.TextContent() ?? "";
-        var match = Regex.Match(textContent, pattern, RegexOptions.Compiled);
+        var match = Regex.Match(textContent, regularExpression, RegexOptions.Compiled);
 
         if (match.Success)
         {
             throw new AssertException(@$"
 HaveNotElementTextContent Assert Exception
 Selector: {selector}
-Actual text content: {textContent}
-Not expected pattern: {pattern}
+Actual text content:\n{textContent}
+Regular expression:\n{regularExpression}
 Because: {because}
 ");
         }
@@ -476,7 +474,7 @@ Because: {because}
     public static IPage HaveElementInnerHTML(
         this ReferenceTypeAssertion<IPage> page,
         string selector,
-        string pattern,
+        string expectedInnerHtml,
         string because = "no reason given",
         PageQuerySelectorOptions? options = null)
     {
@@ -484,15 +482,14 @@ Because: {because}
         if (element is null) throw new AssertException($"Element not found. Selector {selector}");
 
         var innerHtml = element.InnerHTML() ?? "";
-        var match = Regex.Match(innerHtml, pattern, RegexOptions.Compiled);
 
-        if (!match.Success)
+        if (string.Compare(innerHtml, expectedInnerHtml) != 0)
         {
             throw new AssertException(@$"
 HaveElementInnerHTML Assert Exception
 Selector: {selector}
-Actual inner html: {innerHtml}
-Expected pattern: {pattern}
+Actual inner html:\n{innerHtml}
+Expected inner html:\n{expectedInnerHtml}
 Because: {because}
 ");
         }
@@ -503,7 +500,7 @@ Because: {because}
     public static IPage HaveNotElementInnerHTML(
         this ReferenceTypeAssertion<IPage> page,
         string selector,
-        string pattern,
+        string regularExpression,
         string because = "no reason given",
         PageQuerySelectorOptions? options = null)
     {
@@ -511,15 +508,15 @@ Because: {because}
         if (element is null) throw new AssertException($"Element not found. Selector {selector}");
 
         var innerHtml = element.InnerHTML() ?? "";
-        var match = Regex.Match(innerHtml, pattern, RegexOptions.Compiled);
+        var match = Regex.Match(innerHtml, regularExpression, RegexOptions.Compiled);
 
         if (match.Success)
         {
             throw new AssertException(@$"
 HaveNotElementInnerHTML Assert Exception
 Selector: {selector}
-Actual inner html: {innerHtml}
-Not expected pattern: {pattern}
+Actual inner html:\n{innerHtml}
+Regular expression:\n{regularExpression}
 Because: {because}
 ");
         }
@@ -530,23 +527,22 @@ Because: {because}
     public static IPage HaveElementInnerText(
         this ReferenceTypeAssertion<IPage> page,
         string selector,
-        string pattern,
+        string expectedInnerText,
         string because = "no reason given",
         PageQuerySelectorOptions? options = null)
     {
         var element = page.Value.QuerySelector(selector, options);
         if (element is null) throw new AssertException($"Element not found. Selector {selector}");
 
-        var innerHtml = element.InnerText() ?? "";
-        var match = Regex.Match(innerHtml, pattern, RegexOptions.Compiled);
+        var innerText = element.InnerText() ?? "";
 
-        if (!match.Success)
+        if (string.Compare(innerText, expectedInnerText) != 0)
         {
             throw new AssertException(@$"
 HaveElementInnerText Assert Exception
 Selector: {selector}
-Actual inner text: {innerHtml}
-Expected pattern: {pattern}
+Actual inner text:\n{innerText}
+Expected inner text:\n{expectedInnerText}
 Because: {because}
 ");
         }
@@ -557,23 +553,23 @@ Because: {because}
     public static IPage HaveNotElementInnerText(
         this ReferenceTypeAssertion<IPage> page,
         string selector,
-        string pattern,
+        string regularExpression,
         string because = "no reason given",
         PageQuerySelectorOptions? options = null)
     {
         var element = page.Value.QuerySelector(selector, options);
         if (element is null) throw new AssertException($"Element not found. Selector {selector}");
 
-        var innerHtml = element.InnerText() ?? "";
-        var match = Regex.Match(innerHtml, pattern, RegexOptions.Compiled);
+        var innerText = element.InnerText() ?? "";
+        var match = Regex.Match(innerText, regularExpression, RegexOptions.Compiled);
 
         if (match.Success)
         {
             throw new AssertException(@$"
 HaveNotElementInnerText Assert Exception
 Selector: {selector}
-Actual inner text: {innerHtml}
-Not expected pattern: {pattern}
+Actual inner text:\n{innerText}
+Regular expression:\n{regularExpression}
 Because: {because}
 ");
         }
@@ -584,7 +580,7 @@ Because: {because}
     public static IPage HaveElementInputValue(
         this ReferenceTypeAssertion<IPage> page,
         string selector,
-        string pattern,
+        string expectedInputValue,
         string because = "no reason given",
         PageQuerySelectorOptions? options = null)
     {
@@ -592,15 +588,14 @@ Because: {because}
         if (element is null) throw new AssertException($"Element not found. Selector {selector}");
 
         var inputValue = element.InputValue() ?? "";
-        var match = Regex.Match(inputValue, pattern, RegexOptions.Compiled);
 
-        if (!match.Success)
+        if (string.Compare(inputValue, expectedInputValue) != 0)
         {
             throw new AssertException(@$"
 HaveElementInputValue Assert Exception
 Selector: {selector}
-Actual input value: {inputValue}
-Expected pattern: {pattern}
+Actual input value:\n{inputValue}
+Expected input value:\n{expectedInputValue}
 Because: {because}
 ");
         }
@@ -611,7 +606,7 @@ Because: {because}
     public static IPage HaveNotElementInputValue(
         this ReferenceTypeAssertion<IPage> page,
         string selector,
-        string pattern,
+        string regularExpression,
         string because = "no reason given",
         PageQuerySelectorOptions? options = null)
     {
@@ -619,15 +614,15 @@ Because: {because}
         if (element is null) throw new AssertException($"Element not found. Selector {selector}");
 
         var inputValue = element.InputValue() ?? "";
-        var match = Regex.Match(inputValue, pattern, RegexOptions.Compiled);
+        var match = Regex.Match(inputValue, regularExpression, RegexOptions.Compiled);
 
         if (match.Success)
         {
             throw new AssertException(@$"
 HaveNotElementInputValue Assert Exception
 Selector: {selector}
-Actual input value: {inputValue}
-Not expected pattern: {pattern}
+Actual input value:\n{inputValue}
+Regular expression:\n{regularExpression}
 Because: {because}
 ");
         }

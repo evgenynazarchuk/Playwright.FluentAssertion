@@ -7,75 +7,92 @@ public static class PrimitiveAssertions
         return new ReferenceTypeAssertion<string>(content);
     }
 
-    public static void Be(this string actualString, string expectedString, string because = "no reason given")
+    public static ReferenceTypeAssertion<int> Should(this int value)
     {
-        if (string.Compare(actualString, expectedString) != 0)
+        return new ReferenceTypeAssertion<int>(value);
+    }
+
+    public static ReferenceTypeAssertion<bool> Should(this bool value)
+    {
+        return new ReferenceTypeAssertion<bool>(value);
+    }
+
+    public static ReferenceTypeAssertion<byte[]> Should(this byte[] array)
+    {
+        return new ReferenceTypeAssertion<byte[]>(array);
+    }
+
+
+
+    public static void Be(this ReferenceTypeAssertion<string> actualString, string expectedString, string because = "no reason given")
+    {
+        if (string.Compare(actualString.Value, expectedString) != 0)
         {
             throw new AssertException($@"
 Be Assert Exception
-Expected string: {expectedString}
-Actual string: {actualString}
+Expected string:\n{expectedString}
+Actual string:\n{actualString}
 Because: {because}
 ");
         }
     }
 
-    public static void Be(this IEnumerable<string> actualStrings, IEnumerable<string> expectedStrings, string because = "no reason given")
+    public static void Be(this ReferenceTypeAssertion<IEnumerable<string>> actualStrings, IEnumerable<string> expectedStrings, string because = "no reason given")
     {
-        if (actualStrings.Count() != expectedStrings.Count())
+        if (actualStrings.Value.Count() != expectedStrings.Count())
         {
             throw new AssertException($@"
 Be Assert Exception
 Expected total number: {expectedStrings.Count()}
-Actual total number: {actualStrings.Count()}
+Actual total number: {actualStrings.Value.Count()}
 Because: {because}
 ");
         }
 
-        for (int i = 0; i < actualStrings.Count(); i++)
+        for (int i = 0; i < actualStrings.Value.Count(); i++)
         {
-            if (string.Compare(actualStrings.ElementAt(i), expectedStrings.ElementAt(i)) != 0)
+            if (string.Compare(actualStrings.Value.ElementAt(i), expectedStrings.ElementAt(i)) != 0)
             {
                 throw new AssertException($@"
 Be Assert Exception
 Index string: {i}
-Expected string: {expectedStrings.ElementAt(i)}
-Actual string: {actualStrings.ElementAt(i)}
+Expected string:\n{expectedStrings.ElementAt(i)}
+Actual string:\n{actualStrings.Value.ElementAt(i)}
 Because: {because}
 ");
             }
         }
     }
 
-    public static void BeTrue(this bool value, string because = "no reason given")
+    public static void BeTrue(this ReferenceTypeAssertion<bool> value, string because = "no reason given")
     {
-        if (value is not true)
+        if (value.Value is not true)
         {
             throw new AssertException($@"
 BeTrue Assert Exception
 Expected bool: true
-Actual bool: {value}
+Actual bool: {value.Value}
 Because: {because}
 ");
         }
     }
 
-    public static void BeFalse(this bool value, string because = "no reason given")
+    public static void BeFalse(this ReferenceTypeAssertion<bool> value, string because = "no reason given")
     {
-        if (value is true)
+        if (value.Value is true)
         {
             throw new AssertException($@"
 BeFalse Assert Exception
 Expected bool: false
-Actual bool: {value}
+Actual bool: {value.Value}
 Because: {because}
 ");
         }
     }
 
-    public static void Be(this byte[] bytes, byte[] expectedBytes, string because = "no reason given")
+    public static void Be(this ReferenceTypeAssertion<byte[]> bytes, byte[] expectedBytes, string because = "no reason given")
     {
-        if (!bytes.SequenceEqual(expectedBytes))
+        if (!bytes.Value.SequenceEqual(expectedBytes))
         {
             throw new AssertException($@"
 Be Assert Exception
@@ -84,11 +101,11 @@ Because: {because}
         }
     }
 
-    public static void Be(this byte[] bytes, string filePath, string because = "no reason given")
+    public static void Be(this ReferenceTypeAssertion<byte[]> bytes, string filePath, string because = "no reason given")
     {
         var expectedBytes = File.ReadAllBytes(filePath);
 
-        if (!bytes.SequenceEqual(expectedBytes))
+        if (!bytes.Value.SequenceEqual(expectedBytes))
         {
             throw new AssertException($@"
 Be Assert Exception
@@ -98,98 +115,98 @@ Because: {because}
         }
     }
 
-    public static void Be(this int value, int expectedValue)
+    public static void Be(this ReferenceTypeAssertion<int> value, int expectedValue)
     {
-        if (value != expectedValue)
+        if (value.Value != expectedValue)
         {
             throw new AssertException($@"
 Be Assert Exception
-Actual value: {value}
+Actual value: {value.Value}
 Expected value: {expectedValue}
 ");
         }
     }
 
-    public static void NotBe(this int value, int notExpectedValue)
+    public static void NotBe(this ReferenceTypeAssertion<int> value, int notExpectedValue)
     {
-        if (value == notExpectedValue)
+        if (value.Value == notExpectedValue)
         {
             throw new AssertException($@"
 NotBe Assert Exception
-Actual value: {value}
+Actual value: {value.Value}
 Not expected value: {notExpectedValue}
 ");
         }
     }
 
-    public static void BePositive(this int value)
+    public static void BePositive(this ReferenceTypeAssertion<int> value)
     {
-        if (value > 0)
+        if (value.Value > 0)
         {
             throw new AssertException($@"
 BePositive Assert Exception
-Actual value: {value}
+Actual value: {value.Value}
 Expected value: positive
 ");
         }
     }
 
-    public static void BeNegative(this int value)
+    public static void BeNegative(this ReferenceTypeAssertion<int> value)
     {
-        if (value < 0)
+        if (value.Value < 0)
         {
             throw new AssertException($@"
 BeNegative Assert Exception
-Actual value: {value}
+Actual value: {value.Value}
 Expected value: negative
 ");
         }
     }
 
-    public static void BeGreaterThan(this int value, int expectedValue)
+    public static void BeGreaterThan(this ReferenceTypeAssertion<int> value, int expectedValue)
     {
-        if (value > expectedValue)
+        if (value.Value > expectedValue)
         {
             throw new AssertException($@"
 BeGreaterThan Assert Exception
 Expected be greater than: {expectedValue}
-Actual value: {value}
+Actual value: {value.Value}
 ");
         }
     }
 
-    public static void BeLessThan(this int value, int expectedValue)
+    public static void BeLessThan(this ReferenceTypeAssertion<int> value, int expectedValue)
     {
-        if (value < expectedValue)
+        if (value.Value < expectedValue)
         {
             throw new AssertException($@"
 BeLessThan Assert Exception
 Expected be less than: {expectedValue}
-Actual value: {value}
+Actual value: {value.Value}
 ");
         }
     }
 
-    public static void BeGreaterThanOrEqualTo(this int value, int expectedValue)
+    public static void BeGreaterThanOrEqualTo(this ReferenceTypeAssertion<int> value, int expectedValue)
     {
-        if (value >= expectedValue)
+        if (value.Value >= expectedValue)
         {
             throw new AssertException($@"
 BeGreaterThanOrEqualTo Assert Exception
 Expected be greater than or equal: {expectedValue}
-Actual value: {value}
+Actual value: {value.Value}
 ");
         }
     }
 
-    public static void BeLessThanOrEqualTo(this int value, int expectedValue)
+    public static void BeLessThanOrEqualTo(this ReferenceTypeAssertion<int> value, int expectedValue)
     {
-        if (value <= expectedValue)
+        if (value.Value <= expectedValue)
         {
             throw new AssertException($@"
 BeLessThanOrEqualTo Assert Exception
 Expected be less than or equal: {expectedValue}
-Actual value: {value}
+Actual value: {value.Value}
 ");
         }
     }
