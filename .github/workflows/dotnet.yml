@@ -13,13 +13,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2
-    - run: npm playwright install
-    - run: npx playwright install-deps
-    - run: npx playwright install-deps chromium
     - uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 6.0.x
+    - run: dotnet tool install --global Microsoft.Playwright.CLI
+    - run: playwright install
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
