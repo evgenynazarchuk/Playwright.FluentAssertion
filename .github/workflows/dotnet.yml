@@ -19,6 +19,8 @@ jobs:
           5.0.x
           6.0.x
     - run: dotnet tool install --global Microsoft.Playwright.CLI
+    - run: dotnet add package Microsoft.Playwright
+    - run: dotnet build
     - run: playwright install
     - name: Restore dependencies
       run: dotnet restore
