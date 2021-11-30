@@ -18,7 +18,7 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - run: npx playwright install
-    - run: playwright intall
+    - run: playwright install
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
