@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Text.RegularExpressions;
-using Microsoft.Playwright;
+﻿using Microsoft.Playwright;
 using Playwright.Synchronous;
 
 namespace Playwright.FluentAssertions;
@@ -23,7 +17,7 @@ public static class LocatorAssertions
         var element = locator.Value;
         var isChecked = element.IsChecked();
 
-        if (!isChecked)
+        if (isChecked is false)
         {
             throw new AssertException(@$"
 BeChecked Assert Exception
@@ -43,7 +37,7 @@ Because: {because}
         var element = locator.Value;
         var isChecked = element.IsChecked();
 
-        if (isChecked)
+        if (isChecked is true)
         {
             throw new AssertException(@$"
 BeNotChecked Assert Exception
@@ -63,7 +57,7 @@ Because: {because}
         var element = locator.Value;
         var isDisabled = element.IsDisabled();
 
-        if (!isDisabled)
+        if (isDisabled is false)
         {
             throw new AssertException(@$"
 BeDisabled Assert Exception
@@ -83,7 +77,7 @@ Because: {because}
         var element = locator.Value;
         var isDisabled = element.IsDisabled();
 
-        if (isDisabled)
+        if (isDisabled is true)
         {
             throw new AssertException(@$"
 BeNotDisabled Assert Exception
@@ -103,7 +97,7 @@ Because: {because}
         var element = locator.Value;
         var isEditable = element.IsEditable();
 
-        if (!isEditable)
+        if (isEditable is false)
         {
             throw new AssertException(@$"
 BeEditable Assert Exception
@@ -123,7 +117,7 @@ Because: {because}
         var element = locator.Value;
         var isEditable = element.IsEditable();
 
-        if (isEditable)
+        if (isEditable is true)
         {
             throw new AssertException(@$"
 BeNotEditable Assert Exception
@@ -143,7 +137,7 @@ Because: {because}
         var element = locator.Value;
         var isEnabled = element.IsEnabled();
 
-        if (!isEnabled)
+        if (isEnabled is false)
         {
             throw new AssertException(@$"
 BeEnabled Assert Exception
@@ -163,7 +157,7 @@ Because: {because}
         var element = locator.Value;
         var isEnabled = element.IsEnabled();
 
-        if (isEnabled)
+        if (isEnabled is true)
         {
             throw new AssertException(@$"
 BeNotEnabled Assert Exception
@@ -183,7 +177,7 @@ Because: {because}
         var element = locator.Value;
         var isHidden = element.IsHidden();
 
-        if (!isHidden)
+        if (isHidden is false)
         {
             throw new AssertException(@$"
 BeHidden Assert Exception
@@ -203,7 +197,7 @@ Because: {because}
         var element = locator.Value;
         var isHidden = element.IsHidden();
 
-        if (isHidden)
+        if (isHidden is true)
         {
             throw new AssertException(@$"
 BeNotHidden Assert Exception
@@ -223,7 +217,7 @@ Because: {because}
         var element = locator.Value;
         var isVisible = element.IsVisible();
 
-        if (!isVisible)
+        if (isVisible is false)
         {
             throw new AssertException(@$"
 BeVisible Assert Exception
@@ -243,7 +237,7 @@ Because: {because}
         var element = locator.Value;
         var isVisible = element.IsVisible();
 
-        if (isVisible)
+        if (isVisible is true)
         {
             throw new AssertException(@$"
 BeNotVisible Assert Exception
@@ -258,21 +252,22 @@ Because: {because}
 
     public static ILocator HaveTextContent(
         this ReferenceTypeAssertion<ILocator> locator,
-        string expectedTextContent,
+        string expected,
         string because = "no reason given")
     {
         var element = locator.Value;
-        var textContent = element.TextContent() ?? "";
+        var actual = element.TextContent() ?? "";
 
-        if (string.Compare(textContent, expectedTextContent) != 0)
+        if (string.Compare(actual, expected) != 0)
         {
             throw new AssertException(@$"
 BeTextContent Assert Exception
-Actual text content:
-{textContent}
-Expected text content:
-{expectedTextContent}
-Because: {because}
+Actual:
+{actual}
+Expected:
+{expected}
+Because:
+{because}
 ");
         }
 
@@ -281,22 +276,22 @@ Because: {because}
 
     public static ILocator HaveNotTextContent(
         this ReferenceTypeAssertion<ILocator> locator,
-        string regularExpression,
+        string notExpected,
         string because = "no reason given")
     {
         var element = locator.Value;
-        var textContent = element.TextContent() ?? "";
-        var match = Regex.Match(textContent, regularExpression, RegexOptions.Compiled);
+        var actual = element.TextContent() ?? "";
 
-        if (match.Success)
+        if (string.Compare(actual, notExpected) == 0)
         {
             throw new AssertException(@$"
 BeNotTextContent Assert Exception
-Actual text content:
-{textContent}
-Regular expression:
-{regularExpression}
-Because: {because}
+Not expected:
+{notExpected}
+Actual:
+{actual}
+Because:
+{because}
 ");
         }
 
@@ -305,21 +300,22 @@ Because: {because}
 
     public static ILocator HaveInnerHTML(
         this ReferenceTypeAssertion<ILocator> locator,
-        string expectedInnerHtml,
+        string expected,
         string because = "no reason given")
     {
         var element = locator.Value;
-        var innerHTML = element.InnerHTML() ?? "";
+        var actual = element.InnerHTML() ?? "";
 
-        if (string.Compare(innerHTML, expectedInnerHtml) != 0)
+        if (string.Compare(actual, expected) != 0)
         {
             throw new AssertException(@$"
 BeInnerHTML Assert Exception
-Actual inner html:
-{innerHTML}
-Expected inner html:
-{expectedInnerHtml}
-Because: {because}
+Expected:
+{expected}
+Actual:
+{actual}
+Because:
+{because}
 ");
         }
 
@@ -328,22 +324,22 @@ Because: {because}
 
     public static ILocator HaveNotInnerHTML(
         this ReferenceTypeAssertion<ILocator> locator,
-        string regularExpression,
+        string notExpected,
         string because = "no reason given")
     {
         var element = locator.Value;
-        var innerHTML = element.InnerHTML() ?? "";
-        var match = Regex.Match(innerHTML, regularExpression, RegexOptions.Compiled);
+        var actual = element.InnerHTML() ?? "";
 
-        if (match.Success)
+        if (string.Compare(actual, notExpected) == 0)
         {
             throw new AssertException(@$"
 BeNotInnerHTML Assert Exception
-Actual inner html:
-{innerHTML}
-Regular expression:
-{regularExpression}
-Because: {because}
+Not expected:
+{notExpected}
+Actual:
+{actual}
+Because:
+{because}
 ");
         }
 
@@ -352,21 +348,22 @@ Because: {because}
 
     public static ILocator HaveInnerText(
         this ReferenceTypeAssertion<ILocator> locator,
-        string expectedInnerText,
+        string expected,
         string because = "no reason given")
     {
         var element = locator.Value;
-        var innerText = element.InnerText() ?? "";
+        var actual = element.InnerText() ?? "";
 
-        if (string.Compare(innerText, expectedInnerText) != 0)
+        if (string.Compare(actual, expected) != 0)
         {
             throw new AssertException(@$"
 BeInnerText Assert Exception
-Actual inner text:
-{innerText}
-Expected inner text:
-{expectedInnerText}
-Because: {because}
+Expected:
+{expected}
+Actual:
+{actual}
+Because:
+{because}
 ");
         }
 
@@ -375,22 +372,22 @@ Because: {because}
 
     public static ILocator HaveNotInnerText(
         this ReferenceTypeAssertion<ILocator> locator,
-        string regularExpression,
+        string notExpected,
         string because = "no reason given")
     {
         var element = locator.Value;
-        var innerText = element.InnerText() ?? "";
-        var match = Regex.Match(innerText, regularExpression, RegexOptions.Compiled);
+        var actual = element.InnerText() ?? "";
 
-        if (match.Success)
+        if (string.Compare(actual, notExpected) == 0)
         {
             throw new AssertException(@$"
 BeNotInnerText Assert Exception
-Actual inner text:
-{innerText}
-Regular expression:
-{regularExpression}
-Because: {because}
+Not expected:
+{notExpected}
+Actual:
+{actual}
+Because:
+{because}
 ");
         }
 
@@ -399,21 +396,22 @@ Because: {because}
 
     public static ILocator HaveInputValue(
         this ReferenceTypeAssertion<ILocator> locator,
-        string expectedInputValue,
+        string expected,
         string because = "no reason given")
     {
         var element = locator.Value;
-        var inputValue = element.InputValue() ?? "";
+        var actual = element.InputValue() ?? "";
 
-        if (string.Compare(inputValue, expectedInputValue) != 0)
+        if (string.Compare(actual, expected) != 0)
         {
             throw new AssertException(@$"
 BeInputValue Assert Exception
-Actual input value:
-{inputValue}
-Expected input value:
-{expectedInputValue}
-Because: {because}
+Expected:
+{expected}
+Actual:
+{actual}
+Because:
+{because}
 ");
         }
 
@@ -422,22 +420,22 @@ Because: {because}
 
     public static ILocator HaveNotInputValue(
         this ReferenceTypeAssertion<ILocator> locator,
-        string regularExpression,
+        string notExpected,
         string because = "no reason given")
     {
         var element = locator.Value;
-        var inputValue = element.InputValue() ?? "";
-        var match = Regex.Match(inputValue, regularExpression, RegexOptions.Compiled);
+        var actual = element.InputValue() ?? "";
 
-        if (match.Success)
+        if (string.Compare(actual, notExpected) == 0)
         {
             throw new AssertException(@$"
 BeNotInputValue Assert Exception
-Actual input value:
-{inputValue}
-Regular expression:
-{regularExpression}
-Because: {because}
+Not expected:
+{notExpected}
+Actual:
+{actual}
+Because:
+{because}
 ");
         }
 

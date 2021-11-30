@@ -22,8 +22,6 @@ public static class PrimitiveAssertions
         return new ReferenceTypeAssertion<byte[]>(array);
     }
 
-
-
     public static void Be(this ReferenceTypeAssertion<string> actualString, string expectedString, string because = "no reason given")
     {
         if (string.Compare(actualString.Value, expectedString) != 0)
@@ -34,7 +32,8 @@ Expected string:
 {expectedString}
 Actual string:
 {actualString}
-Because: {because}
+Because:
+{because}
 ");
         }
     }
@@ -62,7 +61,8 @@ Expected string:
 {expectedStrings.ElementAt(i)}
 Actual string:
 {actualStrings.Value.ElementAt(i)}
-Because: {because}
+Because:
+{because}
 ");
             }
         }
@@ -76,7 +76,7 @@ Because: {because}
 BeTrue Assert Exception
 Expected bool: true
 Actual bool: {value.Value}
-Because: {because}
+Because:{because}
 ");
         }
     }
@@ -125,8 +125,8 @@ Because: {because}
         {
             throw new AssertException($@"
 Be Assert Exception
-Actual value: {value.Value}
 Expected value: {expectedValue}
+Actual value: {value.Value}
 ");
         }
     }
@@ -137,8 +137,8 @@ Expected value: {expectedValue}
         {
             throw new AssertException($@"
 NotBe Assert Exception
-Actual value: {value.Value}
 Not expected value: {notExpectedValue}
+Actual value: {value.Value}
 ");
         }
     }
@@ -149,8 +149,8 @@ Not expected value: {notExpectedValue}
         {
             throw new AssertException($@"
 BePositive Assert Exception
-Actual value: {value.Value}
 Expected value: positive
+Actual value: {value.Value}
 ");
         }
     }
@@ -161,8 +161,8 @@ Expected value: positive
         {
             throw new AssertException($@"
 BeNegative Assert Exception
-Actual value: {value.Value}
 Expected value: negative
+Actual value: {value.Value}
 ");
         }
     }

@@ -24,7 +24,6 @@
 
 using Microsoft.Playwright;
 using Playwright.Synchronous;
-using System.Text.RegularExpressions;
 
 namespace Playwright.FluentAssertions;
 
@@ -277,21 +276,22 @@ Because: {because}
 
     public static IElementHandle HaveTextContent(
         this ReferenceTypeAssertion<IElementHandle> elementHandle,
-        string expectedTextContent,
+        string expected,
         string because = "no reason given")
     {
         var element = elementHandle.Value;
-        var textContent = element.TextContent() ?? "";
+        var actual = element.TextContent() ?? "";
 
-        if (string.Compare(textContent, expectedTextContent) != 0)
+        if (string.Compare(actual, expected) != 0)
         {
             throw new AssertException(@$"
 HaveTextContent Assert Exception
-Actual text content:
-{textContent}
-Expected text content:
-{expectedTextContent}
-Because: {because}
+Expected:
+{expected}
+Actual:
+{actual}
+Because:
+{because}
 ");
         }
 
@@ -300,22 +300,22 @@ Because: {because}
 
     public static IElementHandle HaveNotTextContent(
         this ReferenceTypeAssertion<IElementHandle> elementHandle,
-        string regularExpression,
+        string notExpected,
         string because = "no reason given")
     {
         var element = elementHandle.Value;
-        var textContent = element.TextContent() ?? "";
-        var match = Regex.Match(textContent, regularExpression, RegexOptions.Compiled);
+        var actual = element.TextContent() ?? "";
 
-        if (match.Success is true)
+        if (string.Compare(actual, notExpected) == 0)
         {
             throw new AssertException(@$"
 HaveNotTextContent Assert Exception
-Actual text content:
-{textContent}
-Regular expression:
-{regularExpression}
-Because: {because}
+Not expected:
+{notExpected}
+Actual:
+{actual}
+Because:
+{because}
 ");
         }
 
@@ -324,21 +324,22 @@ Because: {because}
 
     public static IElementHandle HaveInnerHTML(
         this ReferenceTypeAssertion<IElementHandle> elementHandle,
-        string expectedInnerText,
+        string expected,
         string because = "no reason given")
     {
         var element = elementHandle.Value;
-        var innerHTML = element.InnerHTML() ?? "";
+        var actual = element.InnerHTML() ?? "";
 
-        if (string.Compare(innerHTML, expectedInnerText) != 0)
+        if (string.Compare(actual, expected) != 0)
         {
             throw new AssertException(@$"
 HaveInnerHTML Assert Exception
-Actual inner html:
-{innerHTML}
-Expected inner html:
-{expectedInnerText}
-Because: {because}
+Expected:
+{expected}
+Actual:
+{actual}
+Because:
+{because}
 ");
         }
 
@@ -347,22 +348,22 @@ Because: {because}
 
     public static IElementHandle HaveNotInnerHTML(
         this ReferenceTypeAssertion<IElementHandle> elementHandle,
-        string regularExpression,
+        string notExpected,
         string because = "no reason given")
     {
         var element = elementHandle.Value;
-        var innerHTML = element.InnerHTML() ?? "";
-        var match = Regex.Match(innerHTML, regularExpression, RegexOptions.Compiled);
+        var actual = element.InnerHTML() ?? "";
 
-        if (match.Success is true)
+        if (string.Compare(actual, notExpected) == 0)
         {
             throw new AssertException(@$"
 HaveNotInnerHTML Assert Exception
-Actual inner html:
-{innerHTML}
-Regular expression:
-{regularExpression}
-Because: {because}
+Not expected:
+{notExpected}
+Actual:
+{actual}
+Because:
+{because}
 ");
         }
 
@@ -371,21 +372,22 @@ Because: {because}
 
     public static IElementHandle HaveInnerText(
         this ReferenceTypeAssertion<IElementHandle> elementHandle,
-        string expectedInnerText,
+        string expected,
         string because = "no reason given")
     {
         var element = elementHandle.Value;
-        var innerText = element.InnerText() ?? "";
+        var actual = element.InnerText() ?? "";
 
-        if (string.Compare(innerText, expectedInnerText) != 0)
+        if (string.Compare(actual, expected) != 0)
         {
             throw new AssertException(@$"
 HaveInnerText Assert Exception
-Actual inner text:
-{innerText}
-Expected inner text:
-{expectedInnerText}
-Because: {because}
+Expected:
+{expected}
+Actual:
+{actual}
+Because:
+{because}
 ");
         }
 
@@ -394,22 +396,22 @@ Because: {because}
 
     public static IElementHandle HaveNotInnerText(
         this ReferenceTypeAssertion<IElementHandle> elementHandle,
-        string regularExpression,
+        string notExpected,
         string because = "no reason given")
     {
         var element = elementHandle.Value;
-        var innerText = element.InnerText() ?? "";
-        var match = Regex.Match(innerText, regularExpression, RegexOptions.Compiled);
+        var actual = element.InnerText() ?? "";
 
-        if (match.Success is true)
+        if (string.Compare(actual, notExpected) == 0)
         {
             throw new AssertException(@$"
 HaveNotInnerText Assert Exception
-Actual inner text:
-{innerText}
-Regular expression:
-{regularExpression}
-Because: {because}
+Not expected:
+{notExpected}
+Actual:
+{actual}
+Because:
+{because}
 ");
         }
 
@@ -418,21 +420,22 @@ Because: {because}
 
     public static IElementHandle HaveInputValue(
         this ReferenceTypeAssertion<IElementHandle> elementHandle,
-        string expectedInputValue,
+        string expected,
         string because = "no reason given")
     {
         var element = elementHandle.Value;
-        var inputValue = element.InputValue() ?? "";
+        var actual = element.InputValue() ?? "";
 
-        if (string.Compare(inputValue, expectedInputValue) != 0)
+        if (string.Compare(actual, expected) != 0)
         {
             throw new AssertException(@$"
 HaveInputValue Assert Exception
-Actual input value:
-{inputValue}
-Expected input value:
-{expectedInputValue}
-Because: {because}
+Expected:
+{expected}
+Actual:
+{actual}
+Because:
+{because}
 ");
         }
 
@@ -441,22 +444,22 @@ Because: {because}
 
     public static IElementHandle HaveNotInputValue(
         this ReferenceTypeAssertion<IElementHandle> elementHandle,
-        string regularExpression,
+        string notExpected,
         string because = "no reason given")
     {
         var element = elementHandle.Value;
-        var inputValue = element.InputValue() ?? "";
-        var match = Regex.Match(inputValue, regularExpression, RegexOptions.Compiled);
+        var actual = element.InputValue() ?? "";
 
-        if (match.Success is true)
+        if (string.Compare(actual, notExpected) == 0)
         {
             throw new AssertException(@$"
 HaveNotInputValue Assert Exception
-Actual input value:
-{inputValue}
-Regular expression:
-{regularExpression}
-Because: {because}
+Not expected:
+{notExpected}
+Actual:
+{actual}
+Because:
+{because}
 ");
         }
 
@@ -478,7 +481,7 @@ Because: {because}
         {
             throw new AssertException(@$"
 HaveAttribute Assert Exception
-Expected attribute: {attributeName}
+Expected attribute name: {attributeName}
 Because: {because}
 ");
         }
@@ -497,14 +500,14 @@ Because: {because}
         {
             element.GetAttribute(attributeName);
         }
-        catch 
+        catch
         {
             return elementHandle.Value;
         }
 
         throw new AssertException(@$"
 HaveNotAttribute Assert Exception
-Not expected attribute: {attributeName}
+Not expected attribute name: {attributeName}
 Because: {because}
 ");
     }
@@ -512,28 +515,28 @@ Because: {because}
     public static IElementHandle HaveAttributeValue(
         this ReferenceTypeAssertion<IElementHandle> elementHandle,
         string attributeName,
-        string expectedAttributeValue,
+        string attributeValue,
         string because = "no reason given")
     {
         var element = elementHandle.Value;
-        string? actualAttributeValue = null;
+        string? actual = null;
 
         try
         {
-            actualAttributeValue = element.GetAttribute(attributeName) ?? "";
+            actual = element.GetAttribute(attributeName) ?? "";
         }
         catch
         {
             throw new AssertException($"Attribute not found. Attibute name: {attributeName}");
         }
 
-        if (string.Compare(actualAttributeValue, expectedAttributeValue) != 0)
+        if (string.Compare(actual, attributeValue) != 0)
         {
             throw new AssertException(@$"
 HaveAttributeValue Assert Exception
 Attribute name: {attributeName}
-Expected attribute value: {expectedAttributeValue}
-Actual attribute value: {actualAttributeValue}
+Expected attribute value: {attributeValue}
+Actual attribute value: {actual}
 Because: {because}
 ");
         }
@@ -544,24 +547,24 @@ Because: {because}
     public static IElementHandle HaveComputedStyle(
         this ReferenceTypeAssertion<IElementHandle> elementHandle,
         string styleName,
-        string expectedStyleValue,
+        string styleValue,
         string because = "no reason given")
     {
         var element = elementHandle.Value;
-        var actualStyleValue = element.Evaluate($"e => getComputedStyle(e).{styleName}", element).ToString();
+        var actual = element.Evaluate($"e => getComputedStyle(e).{styleName}", element).ToString();
 
-        if (actualStyleValue == "")
+        if (actual == "")
         {
             throw new AssertException($"Style not found. Style name: {styleName}");
         }
 
-        if (string.Compare(actualStyleValue, expectedStyleValue) != 0)
+        if (string.Compare(actual, styleValue) != 0)
         {
             throw new AssertException($@"
 HaveComputedStyle Assert Exception
 Style name: {styleName}
-Expected style value: {expectedStyleValue}
-Actual style value: {actualStyleValue}
+Expected style value: {styleValue}
+Actual style value: {actual}
 Because: {because}
 ");
         }

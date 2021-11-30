@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-using System;
-
 namespace Playwright.FluentAssertions;
 
 public class AssertException : Exception

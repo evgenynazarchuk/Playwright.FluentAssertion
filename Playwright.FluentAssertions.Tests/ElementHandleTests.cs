@@ -1,5 +1,5 @@
-using NUnit.Framework;
 using Microsoft.Playwright.NUnit;
+using NUnit.Framework;
 using Playwright.Synchronous;
 
 namespace Playwright.FluentAssertions.Tests;
