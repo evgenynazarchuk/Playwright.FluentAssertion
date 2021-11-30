@@ -36,7 +36,7 @@ public class ElementHandleTests : PageTest
 
         Assert.AreEqual(@"
 HaveAttribute Assert Exception
-Expected attribute: enable
+Expected attribute name: enable
 Because: no reason given
 ", ex?.Message);
     }
@@ -59,7 +59,7 @@ Because: no reason given
 
         Assert.AreEqual(@"
 HaveNotAttribute Assert Exception
-Not expected attribute: disable
+Not expected attribute name: disable
 Because: no reason given
 ", ex?.Message);
     }
