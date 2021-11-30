@@ -15,10 +15,12 @@ jobs:
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v2
     - uses: microsoft/playwright-github-action@v1
+    - run: npx playwright install
+    - run: npx playwright install-deps
+    - run: npx playwright install-deps chromium
     - uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 6.0.x
-    - run: npx playwright install
     - run: playwright install
     - name: Restore dependencies
       run: dotnet restore
