@@ -20,6 +20,7 @@ jobs:
           5.0.x
           6.0.x
     - uses: maxmilton/action-setup-playwright@v1.0.6
+    - run: playwright install
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
