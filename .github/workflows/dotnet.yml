@@ -17,7 +17,7 @@ jobs:
     - uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 6.0.x
-    - run: playwright intall
+    - run: npx playwright intall
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
