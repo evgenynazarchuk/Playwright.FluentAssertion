@@ -131,9 +131,7 @@ Because:
         string because = "no reason given",
         PageQuerySelectorOptions? options = null)
     {
-        var element = page.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
+        var element = page.Value.FindElement(selector, options);
         var isChecked = element.IsChecked();
 
         if (isChecked is false)
@@ -156,9 +154,7 @@ Because: {because}
         string because = "no reason given",
         PageQuerySelectorOptions? options = null)
     {
-        var element = page.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
+        var element = page.Value.FindElement(selector, options);
         var isChecked = element.IsChecked();
 
         if (isChecked is true)
@@ -181,9 +177,7 @@ Because: {because}
         string because = "no reason given",
         PageQuerySelectorOptions? options = null)
     {
-        var element = page.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
+        var element = page.Value.FindElement(selector, options);
         var isDisabled = element.IsDisabled();
 
         if (isDisabled is false)
@@ -206,9 +200,7 @@ Because: {because}
         string because = "no reason given",
         PageQuerySelectorOptions? options = null)
     {
-        var element = page.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
+        var element = page.Value.FindElement(selector, options);
         var isDisabled = element.IsDisabled();
 
         if (isDisabled is true)
@@ -231,9 +223,7 @@ Because: {because}
         string because = "no reason given",
         PageQuerySelectorOptions? options = null)
     {
-        var element = page.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
+        var element = page.Value.FindElement(selector, options);
         var isEditable = element.IsEditable();
 
         if (isEditable is false)
@@ -256,9 +246,7 @@ Because: {because}
         string because = "no reason given",
         PageQuerySelectorOptions? options = null)
     {
-        var element = page.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
+        var element = page.Value.FindElement(selector, options);
         var isEditable = element.IsEditable();
 
         if (isEditable is true)
@@ -281,9 +269,7 @@ Because: {because}
         string because = "no reason given",
         PageQuerySelectorOptions? options = null)
     {
-        var element = page.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
+        var element = page.Value.FindElement(selector, options);
         var isEnabled = element.IsEnabled();
 
         if (isEnabled is false)
@@ -306,9 +292,7 @@ Because: {because}
         string because = "no reason given",
         PageQuerySelectorOptions? options = null)
     {
-        var element = page.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
+        var element = page.Value.FindElement(selector, options);
         var isEnabled = element.IsEnabled();
 
         if (isEnabled is true)
@@ -331,9 +315,7 @@ Because: {because}
         string because = "no reason given",
         PageQuerySelectorOptions? options = null)
     {
-        var element = page.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
+        var element = page.Value.FindElement(selector, options);
         var isHidden = element.IsHidden();
 
         if (isHidden is false)
@@ -356,9 +338,7 @@ Because: {because}
         string because = "no reason given",
         PageQuerySelectorOptions? options = null)
     {
-        var element = page.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
+        var element = page.Value.FindElement(selector, options);
         var isHidden = element.IsHidden();
 
         if (isHidden is true)
@@ -381,9 +361,7 @@ Because: {because}
         string because = "no reason given",
         PageQuerySelectorOptions? options = null)
     {
-        var element = page.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
+        var element = page.Value.FindElement(selector, options);
         var isVisible = element.IsVisible();
 
         if (isVisible is false)
@@ -406,9 +384,7 @@ Because: {because}
         string because = "no reason given",
         PageQuerySelectorOptions? options = null)
     {
-        var element = page.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
+        var element = page.Value.FindElement(selector, options);
         var isVisible = element.IsVisible();
 
         if (isVisible is true)
@@ -432,9 +408,7 @@ Because: {because}
         string because = "no reason given",
         PageQuerySelectorOptions? options = null)
     {
-        var element = page.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
+        var element = page.Value.FindElement(selector, options);
         var actual = element.TextContent() ?? "";
 
         if (string.Compare(actual, expected) != 0)
@@ -461,9 +435,7 @@ Because:
         string because = "no reason given",
         PageQuerySelectorOptions? options = null)
     {
-        var element = page.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
+        var element = page.Value.FindElement(selector, options);
         var actual = element.TextContent() ?? "";
 
         if (string.Compare(actual, notExpected) == 0)
@@ -490,9 +462,7 @@ Because:
         string because = "no reason given",
         PageQuerySelectorOptions? options = null)
     {
-        var element = page.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
+        var element = page.Value.FindElement(selector, options);
         var actual = element.InnerHTML() ?? "";
 
         if (string.Compare(actual, expected) != 0)
@@ -519,9 +489,7 @@ Because:
         string because = "no reason given",
         PageQuerySelectorOptions? options = null)
     {
-        var element = page.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
+        var element = page.Value.FindElement(selector, options);
         var actual = element.InnerHTML() ?? "";
 
         if (string.Compare(actual, notExpected) == 0)
@@ -548,9 +516,7 @@ Because:
         string because = "no reason given",
         PageQuerySelectorOptions? options = null)
     {
-        var element = page.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
+        var element = page.Value.FindElement(selector, options);
         var actual = element.InnerText() ?? "";
 
         if (string.Compare(actual, expected) != 0)
@@ -577,9 +543,7 @@ Because:
         string because = "no reason given",
         PageQuerySelectorOptions? options = null)
     {
-        var element = page.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
+        var element = page.Value.FindElement(selector, options);
         var actual = element.InnerText() ?? "";
 
         if (string.Compare(actual, notExpected) == 0)
@@ -606,9 +570,7 @@ Because:
         string because = "no reason given",
         PageQuerySelectorOptions? options = null)
     {
-        var element = page.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
+        var element = page.Value.FindElement(selector, options);
         var actual = element.InputValue() ?? "";
 
         if (string.Compare(actual, expected) != 0)
@@ -635,9 +597,7 @@ Because:
         string because = "no reason given",
         PageQuerySelectorOptions? options = null)
     {
-        var element = page.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
+        var element = page.Value.FindElement(selector, options);
         var actual = element.InputValue() ?? "";
 
         if (string.Compare(actual, notExpected) == 0)
@@ -664,8 +624,7 @@ Because:
         string because = "no reason given",
         PageQuerySelectorOptions? options = null)
     {
-        var element = page.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector: {selector}");
+        var element = page.Value.FindElement(selector, options);
 
         try
         {
@@ -691,8 +650,7 @@ Because: {because}
         string because = "no reason given",
         PageQuerySelectorOptions? options = null)
     {
-        var element = page.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector: {selector}");
+        var element = page.Value.FindElement(selector, options);
 
         try
         {
@@ -719,8 +677,7 @@ Because: {because}
         string because = "no reason given",
         PageQuerySelectorOptions? options = null)
     {
-        var element = page.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector: {selector}");
+        var element = page.Value.FindElement(selector, options);
         string? actualAttributeValue = null;
 
         try
@@ -755,8 +712,7 @@ Because: {because}
         string because = "no reason given",
         PageQuerySelectorOptions? options = null)
     {
-        var element = page.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector: {selector}");
+        var element = page.Value.FindElement(selector, options);
         var actualStyleValue = element.Evaluate($"e => getComputedStyle(e).{styleName}", element).ToString();
 
         if (actualStyleValue == "")

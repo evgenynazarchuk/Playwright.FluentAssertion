@@ -31,7 +31,7 @@ Be Assert Exception
 Expected string:
 {expectedString}
 Actual string:
-{actualString}
+{actualString.Value}
 Because:
 {because}
 ");
@@ -65,32 +65,6 @@ Because:
 {because}
 ");
             }
-        }
-    }
-
-    public static void BeTrue(this ReferenceTypeAssertion<bool> value, string because = "no reason given")
-    {
-        if (value.Value is not true)
-        {
-            throw new AssertException($@"
-BeTrue Assert Exception
-Expected bool: true
-Actual bool: {value.Value}
-Because:{because}
-");
-        }
-    }
-
-    public static void BeFalse(this ReferenceTypeAssertion<bool> value, string because = "no reason given")
-    {
-        if (value.Value is true)
-        {
-            throw new AssertException($@"
-BeFalse Assert Exception
-Expected bool: false
-Actual bool: {value.Value}
-Because: {because}
-");
         }
     }
 
@@ -131,7 +105,49 @@ Actual value: {value.Value}
         }
     }
 
-    public static void NotBe(this ReferenceTypeAssertion<int> value, int notExpectedValue)
+    public static void BeTrue(this ReferenceTypeAssertion<bool> value, string because = "no reason given")
+    {
+        if (value.Value is not true)
+        {
+            throw new AssertException($@"
+BeTrue Assert Exception
+Expected bool: true
+Actual bool: {value.Value}
+Because:{because}
+");
+        }
+    }
+
+    public static void BeFalse(this ReferenceTypeAssertion<bool> value, string because = "no reason given")
+    {
+        if (value.Value is true)
+        {
+            throw new AssertException($@"
+BeFalse Assert Exception
+Expected bool: false
+Actual bool: {value.Value}
+Because: {because}
+");
+        }
+    }
+
+    public static void BeNot(this ReferenceTypeAssertion<string> actual, string notExpected, string because = "no reason given")
+    {
+        if (string.Compare(actual.Value, notExpected) == 0)
+        {
+            throw new AssertException($@"
+BeNot Assert Exception
+Not expected string:
+{notExpected}
+Actual string:
+{actual.Value}
+Because:
+{because}
+");
+        }
+    }
+
+    public static void BeNot(this ReferenceTypeAssertion<int> value, int notExpectedValue)
     {
         if (value.Value == notExpectedValue)
         {
