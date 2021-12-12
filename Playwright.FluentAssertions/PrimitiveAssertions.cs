@@ -1,4 +1,6 @@
-﻿namespace Playwright.FluentAssertions;
+﻿using System.Linq;
+
+namespace Playwright.FluentAssertions;
 
 public static class PrimitiveAssertions
 {
@@ -20,6 +22,11 @@ public static class PrimitiveAssertions
     public static ReferenceTypeAssertion<byte[]> Should(this byte[] array)
     {
         return new ReferenceTypeAssertion<byte[]>(array);
+    }
+
+    public static ReferenceTypeAssertion<Enum> Should(this Enum e)
+    {
+        return new ReferenceTypeAssertion<Enum>(e);
     }
 
     public static ReferenceTypeAssertion<IEnumerable<string>> Should(this IEnumerable<string> list)
@@ -122,6 +129,18 @@ Actual value: {value.Value}
         }
     }
 
+    public static void Be(this ReferenceTypeAssertion<Enum> value, Enum expectedValue)
+    {
+        if (!Enum.Equals(value.Value, expectedValue))
+        {
+            throw new AssertException($@"
+Be Assert Exception
+Expected value: {expectedValue}
+Actual value: {value.Value}
+");
+        }
+    }
+
     public static void BeNull(this object? obj)
     {
         if (obj is not null)
@@ -142,6 +161,66 @@ Actual: not null
 BeNotNull Assert Exception
 Expected: not null
 Actual: null
+");
+        }
+    }
+
+    public static void Contains(this ReferenceTypeAssertion<IEnumerable<string>> list, string expectedText, string because = "no reason given")
+    {
+        if (!list.Value.Any(x => x.Contains(expectedText)))
+        {
+            throw new AssertException(@$"
+Contain Assert Exception
+Expected value:
+{expectedText}
+Actual list:
+{string.Join(", ", list.Value)}
+Because: {because}
+");
+        }
+    }
+
+    public static void Contains(this ReferenceTypeAssertion<string> text, string expectedText, string because = "no reason given")
+    {
+        if (!text.Value.Contains(expectedText))
+        {
+            throw new AssertException(@$"
+Contain Assert Exception
+Expected value:
+{expectedText}
+Actual:
+{expectedText}
+Because: {because}
+");
+        }
+    }
+
+    public static void NotContains(this ReferenceTypeAssertion<IEnumerable<string>> list, string expectedText, string because = "")
+    {
+        if (list.Value.Any(x => x.Contains(expectedText)))
+        {
+            throw new AssertException(@$"
+NotContain Assert Exception
+Not expected: 
+{expectedText}
+Actual: 
+{string.Join(",", list.Value)}
+Because: {because}
+");
+        }
+    }
+
+    public static void NotContains(this ReferenceTypeAssertion<string> text, string notExpectedText, string because = "no reason given")
+    {
+        if (text.Value.Contains(notExpectedText))
+        {
+            throw new AssertException(@$"
+NotContain Assert Exception
+Not expected value:
+{notExpectedText}
+Actual:
+{notExpectedText}
+Because: {because}
 ");
         }
     }
@@ -196,6 +275,19 @@ Because:
 NotBe Assert Exception
 Not expected value: {notExpectedValue}
 Actual value: {value.Value}
+");
+        }
+    }
+
+    public static void BeNot(this ReferenceTypeAssertion<Enum> value, Enum notExpectedValue, string because = "no reason given")
+    {
+        if (Enum.Equals(value.Value, notExpectedValue))
+        {
+            throw new AssertException($@"
+BeNot Assert Exception
+Not expected: {notExpectedValue}
+Actual value: {value.Value}
+Because: {because}
 ");
         }
     }
