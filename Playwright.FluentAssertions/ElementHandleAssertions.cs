@@ -553,7 +553,7 @@ Because: {because}
         var element = elementHandle.Value;
         var actual = element.Evaluate($"e => getComputedStyle(e).{styleName}", element).ToString();
 
-        if (actual == "")
+        if (string.IsNullOrEmpty(actual))
         {
             throw new AssertException($"Style not found. Style name: {styleName}");
         }
