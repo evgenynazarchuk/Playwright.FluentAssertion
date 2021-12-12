@@ -2,9 +2,9 @@
 
 public static class PrimitiveAssertions
 {
-    public static ReferenceTypeAssertion<string> Should(this string content)
+    public static ReferenceTypeAssertion<string> Should(this string text)
     {
-        return new ReferenceTypeAssertion<string>(content);
+        return new ReferenceTypeAssertion<string>(text);
     }
 
     public static ReferenceTypeAssertion<int> Should(this int value)
@@ -20,6 +20,11 @@ public static class PrimitiveAssertions
     public static ReferenceTypeAssertion<byte[]> Should(this byte[] array)
     {
         return new ReferenceTypeAssertion<byte[]>(array);
+    }
+
+    public static ReferenceTypeAssertion<IEnumerable<string>> Should(this IEnumerable<string> list)
+    {
+        return new ReferenceTypeAssertion<IEnumerable<string>>(list);
     }
 
     public static void Be(this ReferenceTypeAssertion<string> actualString, string expectedString, string because = "no reason given")
@@ -101,6 +106,42 @@ Because: {because}
 Be Assert Exception
 Expected value: {expectedValue}
 Actual value: {value.Value}
+");
+        }
+    }
+
+    public static void Be(this ReferenceTypeAssertion<bool> value, bool expectedValue)
+    {
+        if (value.Value != expectedValue)
+        {
+            throw new AssertException($@"
+Be Assert Exception
+Expected value: {expectedValue}
+Actual value: {value.Value}
+");
+        }
+    }
+
+    public static void BeNull(this object? obj)
+    {
+        if (obj is not null)
+        {
+            throw new AssertException(@"
+BeNull Assert Exception
+Expected: null
+Actual: not null
+");
+        }
+    }
+
+    public static void BeNotNull(this object? obj)
+    {
+        if (obj is null)
+        {
+            throw new AssertException(@"
+BeNotNull Assert Exception
+Expected: not null
+Actual: null
 ");
         }
     }
