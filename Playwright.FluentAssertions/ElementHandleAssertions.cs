@@ -328,7 +328,7 @@ Because:
         string because = "no reason given")
     {
         var element = elementHandle.Value;
-        var actual = element.InnerHTML() ?? "";
+        var actual = element.InnerHTML();
 
         if (string.Compare(actual, expected) != 0)
         {
@@ -352,7 +352,7 @@ Because:
         string because = "no reason given")
     {
         var element = elementHandle.Value;
-        var actual = element.InnerHTML() ?? "";
+        var actual = element.InnerHTML();
 
         if (string.Compare(actual, notExpected) == 0)
         {
@@ -376,7 +376,7 @@ Because:
         string because = "no reason given")
     {
         var element = elementHandle.Value;
-        var actual = element.InnerText() ?? "";
+        var actual = element.InnerText();
 
         if (string.Compare(actual, expected) != 0)
         {
@@ -400,7 +400,7 @@ Because:
         string because = "no reason given")
     {
         var element = elementHandle.Value;
-        var actual = element.InnerText() ?? "";
+        var actual = element.InnerText();
 
         if (string.Compare(actual, notExpected) == 0)
         {
@@ -421,10 +421,11 @@ Because:
     public static IElementHandle HaveInputValue(
         this ReferenceTypeAssertion<IElementHandle> elementHandle,
         string expected,
-        string because = "no reason given")
+        string because = "no reason given",
+        ElementHandleInputValueOptions? inputOptions = null)
     {
         var element = elementHandle.Value;
-        var actual = element.InputValue() ?? "";
+        var actual = element.InputValue(inputOptions);
 
         if (string.Compare(actual, expected) != 0)
         {
@@ -445,10 +446,11 @@ Because:
     public static IElementHandle HaveNotInputValue(
         this ReferenceTypeAssertion<IElementHandle> elementHandle,
         string notExpected,
-        string because = "no reason given")
+        string because = "no reason given",
+        ElementHandleInputValueOptions? inputOptions = null)
     {
         var element = elementHandle.Value;
-        var actual = element.InputValue() ?? "";
+        var actual = element.InputValue(inputOptions);
 
         if (string.Compare(actual, notExpected) == 0)
         {
@@ -472,12 +474,9 @@ Because:
         string because = "no reason given")
     {
         var element = elementHandle.Value;
+        var value = element.GetAttribute(attributeName);
 
-        try
-        {
-            element.GetAttribute(attributeName);
-        }
-        catch
+        if (value is null)
         {
             throw new AssertException(@$"
 HaveAttribute Assert Exception
@@ -495,21 +494,18 @@ Because: {because}
         string because = "no reason given")
     {
         var element = elementHandle.Value;
+        var value = element.GetAttribute(attributeName);
 
-        try
+        if (value is not null)
         {
-            element.GetAttribute(attributeName);
-        }
-        catch
-        {
-            return elementHandle.Value;
-        }
-
-        throw new AssertException(@$"
+            throw new AssertException(@$"
 HaveNotAttribute Assert Exception
 Not expected attribute name: {attributeName}
 Because: {because}
 ");
+        }
+
+        return elementHandle.Value;
     }
 
     public static IElementHandle HaveAttributeValue(
@@ -519,24 +515,48 @@ Because: {because}
         string because = "no reason given")
     {
         var element = elementHandle.Value;
-        string? actual = null;
+        var value = element.GetAttribute(attributeName);
 
-        try
-        {
-            actual = element.GetAttribute(attributeName) ?? "";
-        }
-        catch
+        if (value is null)
         {
             throw new AssertException($"Attribute not found. Attibute name: {attributeName}");
         }
 
-        if (string.Compare(actual, attributeValue) != 0)
+        if (string.Compare(value, attributeValue) != 0)
         {
             throw new AssertException(@$"
 HaveAttributeValue Assert Exception
 Attribute name: {attributeName}
 Expected attribute value: {attributeValue}
-Actual attribute value: {actual}
+Actual attribute value: {value}
+Because: {because}
+");
+        }
+
+        return element;
+    }
+
+    public static IElementHandle HaveNotAttributeValue(
+        this ReferenceTypeAssertion<IElementHandle> elementHandle,
+        string attributeName,
+        string attributeValue,
+        string because = "no reason given")
+    {
+        var element = elementHandle.Value;
+        var value = element.GetAttribute(attributeName);
+
+        if (value is null)
+        {
+            throw new AssertException($"Attribute not found. Attibute name: {attributeName}");
+        }
+
+        if (string.Compare(value, attributeValue) == 0)
+        {
+            throw new AssertException(@$"
+HaveNotAttributeValue Assert Exception
+Attribute name: {attributeName}
+Not expected attribute value: {attributeValue}
+Actual attribute value: {value}
 Because: {because}
 ");
         }

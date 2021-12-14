@@ -1,3 +1,27 @@
+/*
+ * MIT License
+ *
+ * Copyright (c) Evgeny Nazarchuk.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 using Microsoft.Playwright.NUnit;
 using NUnit.Framework;
 using Playwright.Synchronous;
@@ -9,10 +33,11 @@ public class PageTests : PageTest
     [SetUp]
     public void SetUp()
     {
+        Page.SetDefaultTimeout(2000);
         Page.SetContent(@"
 <html>
     <body style='color:#F3F3F3;font-family:monospace'>
-        <div disable></div>
+        <div disabled>Hello</div>
     </body>
 </html>
 ");
@@ -21,7 +46,7 @@ public class PageTests : PageTest
     [Test]
     public void HaveElementAttributeWhenCorrect()
     {
-        Page.Should().HaveElementAttribute("div", "disable");
+        Page.Should().HaveElementAttribute("div", "disabled");
     }
 
     [Test]
@@ -32,7 +57,7 @@ public class PageTests : PageTest
             Page.Should().HaveElementAttribute("#notfound", "enable");
         });
 
-        Assert.AreEqual("Element not found. Selector: #notfound", ex?.Message);
+        ex?.Message.Should().Contain("Timeout 2000ms exceeded");
     }
 
     [Test]
@@ -49,6 +74,7 @@ Selector: div
 Expected attribute: enable
 Because: no reason given
 ", ex?.Message);
+
     }
 
     [Test]
@@ -62,13 +88,13 @@ Because: no reason given
     {
         var ex = Assert.Catch(() =>
         {
-            Page.Should().HaveNotElementAttribute("div", "disable");
+            Page.Should().HaveNotElementAttribute("div", "disabled");
         });
 
         Assert.AreEqual(@"
 HaveNotElementAttribute Assert Exception
 Selector: div
-Not expected attribute: disable
+Not expected attribute: disabled
 Because: no reason given
 ", ex?.Message);
     }
@@ -81,13 +107,13 @@ Because: no reason given
             Page.Should().HaveNotElementAttribute("#notfound", "");
         });
 
-        Assert.AreEqual(@"Element not found. Selector: #notfound", ex?.Message);
+        ex?.Message.Should().Contain("Timeout 2000ms exceeded");
     }
 
     [Test]
     public void HaveElementAttributeValueWhenCorrectEmptyValue()
     {
-        Page.Should().HaveElementAttributeValue("div", "disable", "");
+        Page.Should().HaveElementAttributeValue("div", "disabled", "");
     }
 
     [Test]
@@ -101,10 +127,10 @@ Because: no reason given
     {
         var ex = Assert.Catch(() =>
         {
-            Page.Should().HaveElementAttributeValue("#notfound", "disable", "");
+            Page.Should().HaveElementAttributeValue("#notfound", "disabled", "");
         });
 
-        Assert.AreEqual("Element not found. Selector: #notfound", ex?.Message);
+        ex?.Message.Should().Contain("Timeout 2000ms exceeded");
     }
 
     [Test]
@@ -151,7 +177,7 @@ Because: no reason given
         });
 
         Assert.AreEqual(@"
-HaveComputedStyle Assert Exception
+HaveElementComputedStyle Assert Exception
 Selector: body
 Style name: color
 Expected style value: rgb(60, 60, 60)
@@ -168,7 +194,7 @@ Because: no reason given
             Page.Should().HaveElementComputedStyle("#notfound", "color", "rgb(243, 243, 243)");
         });
 
-        Assert.AreEqual("Element not found. Selector: #notfound", ex?.Message);
+        ex?.Message.Should().Contain("Timeout 2000ms exceeded");
     }
 
     [Test]

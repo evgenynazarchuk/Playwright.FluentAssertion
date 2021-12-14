@@ -34,6 +34,16 @@ public static class FrameAssertions
         return new ReferenceTypeAssertion<IFrame>(frame);
     }
 
+    private static IElementHandle GetElement(IFrame frame,
+        string selector,
+        FrameWaitForSelectorOptions? waitOptions = null,
+        FrameQuerySelectorOptions? queryOptions = null)
+    {
+        frame.WaitForSelector(selector, waitOptions);
+        var element = frame.QuerySelector(selector, queryOptions)!;
+        return element!;
+    }
+
     public static IFrame HaveTitle(
         this ReferenceTypeAssertion<IFrame> frame,
         string expected,
@@ -129,11 +139,10 @@ Because:
         this ReferenceTypeAssertion<IFrame> frame,
         string selector,
         string because = "no reason given",
-        FrameQuerySelectorOptions? options = null)
+        FrameWaitForSelectorOptions? waitOptions = null,
+        FrameQuerySelectorOptions? queryOptions = null)
     {
-        var element = frame.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
+        var element = GetElement(frame.Value, selector, waitOptions, queryOptions);
         var isChecked = element.IsChecked();
 
         if (isChecked is false)
@@ -154,11 +163,10 @@ Because: {because}
         this ReferenceTypeAssertion<IFrame> frame,
         string selector,
         string because = "no reason given",
-        FrameQuerySelectorOptions? options = null)
+        FrameWaitForSelectorOptions? waitOptions = null,
+        FrameQuerySelectorOptions? queryOptions = null)
     {
-        var element = frame.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
+        var element = GetElement(frame.Value, selector, waitOptions, queryOptions);
         var isChecked = element.IsChecked();
 
         if (isChecked is true)
@@ -179,11 +187,10 @@ Because: {because}
         this ReferenceTypeAssertion<IFrame> frame,
         string selector,
         string because = "no reason given",
-        FrameQuerySelectorOptions? options = null)
+        FrameWaitForSelectorOptions? waitOptions = null,
+        FrameQuerySelectorOptions? queryOptions = null)
     {
-        var element = frame.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
+        var element = GetElement(frame.Value, selector, waitOptions, queryOptions);
         var isDisabled = element.IsDisabled();
 
         if (isDisabled is false)
@@ -204,11 +211,10 @@ Because: {because}
         this ReferenceTypeAssertion<IFrame> frame,
         string selector,
         string because = "no reason given",
-        FrameQuerySelectorOptions? options = null)
+        FrameWaitForSelectorOptions? waitOptions = null,
+        FrameQuerySelectorOptions? queryOptions = null)
     {
-        var element = frame.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
+        var element = GetElement(frame.Value, selector, waitOptions, queryOptions);
         var isDisabled = element.IsDisabled();
 
         if (isDisabled is true)
@@ -229,11 +235,10 @@ Because: {because}
         this ReferenceTypeAssertion<IFrame> frame,
         string selector,
         string because = "no reason given",
-        FrameQuerySelectorOptions? options = null)
+        FrameWaitForSelectorOptions? waitOptions = null,
+        FrameQuerySelectorOptions? queryOptions = null)
     {
-        var element = frame.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
+        var element = GetElement(frame.Value, selector, waitOptions, queryOptions);
         var isEditable = element.IsEditable();
 
         if (isEditable is false)
@@ -254,11 +259,10 @@ Because: {because}
         this ReferenceTypeAssertion<IFrame> frame,
         string selector,
         string because = "no reason given",
-        FrameQuerySelectorOptions? options = null)
+        FrameWaitForSelectorOptions? waitOptions = null,
+        FrameQuerySelectorOptions? queryOptions = null)
     {
-        var element = frame.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
+        var element = GetElement(frame.Value, selector, waitOptions, queryOptions);
         var isEditable = element.IsEditable();
 
         if (isEditable is true)
@@ -279,11 +283,10 @@ Because: {because}
         this ReferenceTypeAssertion<IFrame> frame,
         string selector,
         string because = "no reason given",
-        FrameQuerySelectorOptions? options = null)
+        FrameWaitForSelectorOptions? waitOptions = null,
+        FrameQuerySelectorOptions? queryOptions = null)
     {
-        var element = frame.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
+        var element = GetElement(frame.Value, selector, waitOptions, queryOptions);
         var isEnabled = element.IsEnabled();
 
         if (isEnabled is false)
@@ -304,11 +307,10 @@ Because: {because}
         this ReferenceTypeAssertion<IFrame> frame,
         string selector,
         string because = "no reason given",
-        FrameQuerySelectorOptions? options = null)
+        FrameWaitForSelectorOptions? waitOptions = null,
+        FrameQuerySelectorOptions? queryOptions = null)
     {
-        var element = frame.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
+        var element = GetElement(frame.Value, selector, waitOptions, queryOptions);
         var isEnabled = element.IsEnabled();
 
         if (isEnabled is true)
@@ -329,11 +331,10 @@ Because: {because}
         this ReferenceTypeAssertion<IFrame> frame,
         string selector,
         string because = "no reason given",
-        FrameQuerySelectorOptions? options = null)
+        FrameWaitForSelectorOptions? waitOptions = null,
+        FrameQuerySelectorOptions? queryOptions = null)
     {
-        var element = frame.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
+        var element = GetElement(frame.Value, selector, waitOptions, queryOptions);
         var isHidden = element.IsHidden();
 
         if (isHidden is false)
@@ -354,11 +355,10 @@ Because: {because}
         this ReferenceTypeAssertion<IFrame> frame,
         string selector,
         string because = "no reason given",
-        FrameQuerySelectorOptions? options = null)
+        FrameWaitForSelectorOptions? waitOptions = null,
+        FrameQuerySelectorOptions? queryOptions = null)
     {
-        var element = frame.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
+        var element = GetElement(frame.Value, selector, waitOptions, queryOptions);
         var isHidden = element.IsHidden();
 
         if (isHidden is true)
@@ -379,11 +379,10 @@ Because: {because}
         this ReferenceTypeAssertion<IFrame> frame,
         string selector,
         string because = "no reason given",
-        FrameQuerySelectorOptions? options = null)
+        FrameWaitForSelectorOptions? waitOptions = null,
+        FrameQuerySelectorOptions? queryOptions = null)
     {
-        var element = frame.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
+        var element = GetElement(frame.Value, selector, waitOptions, queryOptions);
         var isVisible = element.IsVisible();
 
         if (isVisible is false)
@@ -404,11 +403,10 @@ Because: {because}
         this ReferenceTypeAssertion<IFrame> frame,
         string selector,
         string because = "no reason given",
-        FrameQuerySelectorOptions? options = null)
+        FrameWaitForSelectorOptions? waitOptions = null,
+        FrameQuerySelectorOptions? queryOptions = null)
     {
-        var element = frame.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
+        var element = GetElement(frame.Value, selector, waitOptions, queryOptions);
         var isVisible = element.IsVisible();
 
         if (isVisible is true)
@@ -430,11 +428,10 @@ Because: {because}
         string selector,
         string expected,
         string because = "no reason given",
-        FrameQuerySelectorOptions? options = null)
+        FrameWaitForSelectorOptions? waitOptions = null,
+        FrameQuerySelectorOptions? queryOptions = null)
     {
-        var element = frame.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
+        var element = GetElement(frame.Value, selector, waitOptions, queryOptions);
         var textContent = element.TextContent() ?? "";
 
         if (string.Compare(textContent, expected) != 0)
@@ -459,11 +456,10 @@ Because:
         string selector,
         string notExpected,
         string because = "no reason given",
-        FrameQuerySelectorOptions? options = null)
+        FrameWaitForSelectorOptions? waitOptions = null,
+        FrameQuerySelectorOptions? queryOptions = null)
     {
-        var element = frame.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
+        var element = GetElement(frame.Value, selector, waitOptions, queryOptions);
         var actual = element.TextContent() ?? "";
 
         if (string.Compare(actual, notExpected) == 0)
@@ -488,12 +484,11 @@ Because:
         string selector,
         string expected,
         string because = "no reason given",
-        FrameQuerySelectorOptions? options = null)
+        FrameWaitForSelectorOptions? waitOptions = null,
+        FrameQuerySelectorOptions? queryOptions = null)
     {
-        var element = frame.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
-        var actual = element.InnerHTML() ?? "";
+        var element = GetElement(frame.Value, selector, waitOptions, queryOptions);
+        var actual = element.InnerHTML();
 
         if (string.Compare(actual, expected) != 0)
         {
@@ -517,12 +512,11 @@ Because:
         string selector,
         string notExpected,
         string because = "no reason given",
-        FrameQuerySelectorOptions? options = null)
+        FrameWaitForSelectorOptions? waitOptions = null,
+        FrameQuerySelectorOptions? queryOptions = null)
     {
-        var element = frame.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
-        var actual = element.InnerHTML() ?? "";
+        var element = GetElement(frame.Value, selector, waitOptions, queryOptions);
+        var actual = element.InnerHTML();
 
         if (string.Compare(actual, notExpected) == 0)
         {
@@ -546,12 +540,11 @@ Because:
         string selector,
         string expected,
         string because = "no reason given",
-        FrameQuerySelectorOptions? options = null)
+        FrameWaitForSelectorOptions? waitOptions = null,
+        FrameQuerySelectorOptions? queryOptions = null)
     {
-        var element = frame.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
-        var actual = element.InnerText() ?? "";
+        var element = GetElement(frame.Value, selector, waitOptions, queryOptions);
+        var actual = element.InnerText();
 
         if (string.Compare(actual, expected) != 0)
         {
@@ -575,12 +568,11 @@ Because:
         string selector,
         string notExpected,
         string because = "no reason given",
-        FrameQuerySelectorOptions? options = null)
+        FrameWaitForSelectorOptions? waitOptions = null,
+        FrameQuerySelectorOptions? queryOptions = null)
     {
-        var element = frame.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
-        var actual = element.InnerText() ?? "";
+        var element = GetElement(frame.Value, selector, waitOptions, queryOptions);
+        var actual = element.InnerText();
 
         if (string.Compare(actual, notExpected) == 0)
         {
@@ -604,12 +596,12 @@ Because:
         string selector,
         string expected,
         string because = "no reason given",
-        FrameQuerySelectorOptions? options = null)
+        FrameWaitForSelectorOptions? waitOptions = null,
+        FrameQuerySelectorOptions? queryOptions = null,
+        ElementHandleInputValueOptions? inputOptions = null)
     {
-        var element = frame.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
-        var actual = element.InputValue() ?? "";
+        var element = GetElement(frame.Value, selector, waitOptions, queryOptions);
+        var actual = element.InputValue(inputOptions);
 
         if (string.Compare(actual, expected) != 0)
         {
@@ -633,12 +625,12 @@ Because:
         string selector,
         string notExpected,
         string because = "no reason given",
-        FrameQuerySelectorOptions? options = null)
+        FrameWaitForSelectorOptions? waitOptions = null,
+        FrameQuerySelectorOptions? queryOptions = null,
+        ElementHandleInputValueOptions? inputOptions = null)
     {
-        var element = frame.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector {selector}");
-
-        var actual = element.InputValue() ?? "";
+        var element = GetElement(frame.Value, selector, waitOptions, queryOptions);
+        var actual = element.InputValue(inputOptions);
 
         if (string.Compare(actual, notExpected) == 0)
         {
@@ -662,16 +654,13 @@ Because:
         string selector,
         string attributeName,
         string because = "no reason given",
-        FrameQuerySelectorOptions? options = null)
+        FrameWaitForSelectorOptions? waitOptions = null,
+        FrameQuerySelectorOptions? queryOptions = null)
     {
-        var element = frame.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector: {selector}");
+        var element = GetElement(frame.Value, selector, waitOptions, queryOptions);
+        var value = element.GetAttribute(attributeName);
 
-        try
-        {
-            element.GetAttribute(attributeName);
-        }
-        catch
+        if (value is null)
         {
             throw new AssertException(@$"
 HaveElementAttribute Assert Exception
@@ -689,16 +678,13 @@ Because: {because}
         string selector,
         string attributeName,
         string because = "no reason given",
-        FrameQuerySelectorOptions? options = null)
+        FrameWaitForSelectorOptions? waitOptions = null,
+        FrameQuerySelectorOptions? queryOptions = null)
     {
-        var element = frame.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector: {selector}");
+        var element = GetElement(frame.Value, selector, waitOptions, queryOptions);
+        var value = element.GetAttribute(attributeName);
 
-        try
-        {
-            element.GetAttribute(attributeName);
-        }
-        catch
+        if (value is not null)
         {
             return frame.Value;
         }
@@ -717,29 +703,25 @@ Because: {because}
         string attributeName,
         string expectedAttributeValue,
         string because = "no reason given",
-        FrameQuerySelectorOptions? options = null)
+        FrameWaitForSelectorOptions? waitOptions = null,
+        FrameQuerySelectorOptions? queryOptions = null)
     {
-        var element = frame.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector: {selector}");
-        string? actualAttributeValue = null;
+        var element = GetElement(frame.Value, selector, waitOptions, queryOptions);
+        var value = element.GetAttribute(attributeName);
 
-        try
-        {
-            actualAttributeValue = element.GetAttribute(attributeName) ?? "";
-        }
-        catch
+        if (value is null)
         {
             throw new AssertException($"Attribute not found. Attibute name: {attributeName}");
         }
 
-        if (string.Compare(actualAttributeValue, expectedAttributeValue) != 0)
+        if (string.Compare(value, expectedAttributeValue) != 0)
         {
             throw new AssertException(@$"
 HaveElementAttributeValue Assert Exception
 Selector: {selector}
 Expected attribute: {attributeName}
 Expected attribute value: {expectedAttributeValue}
-Actual attribute value: {actualAttributeValue}
+Actual attribute value: {value}
 Because: {because}
 ");
         }
@@ -753,25 +735,25 @@ Because: {because}
         string styleName,
         string expectedStyleValue,
         string because = "no reason given",
-        FrameQuerySelectorOptions? options = null)
+        FrameWaitForSelectorOptions? waitOptions = null,
+        FrameQuerySelectorOptions? queryOptions = null)
     {
-        var element = frame.Value.QuerySelector(selector, options);
-        if (element is null) throw new AssertException($"Element not found. Selector: {selector}");
-        var actualStyleValue = element.Evaluate($"e => getComputedStyle(e).{styleName}", element).ToString();
+        var element = GetElement(frame.Value, selector, waitOptions, queryOptions);
+        var value = element.Evaluate($"e => getComputedStyle(e).{styleName}", element).ToString();
 
-        if (actualStyleValue == "")
+        if (value == "")
         {
             throw new AssertException($"Style not found. Style name: {styleName}");
         }
 
-        if (string.Compare(actualStyleValue, expectedStyleValue) != 0)
+        if (string.Compare(value, expectedStyleValue) != 0)
         {
             throw new AssertException($@"
 HaveComputedStyle Assert Exception
 Selector: {selector}
 Style name: {styleName}
 Expected style value: {expectedStyleValue}
-Actual style value: {actualStyleValue}
+Actual style value: {value}
 Because: {because}
 ");
         }

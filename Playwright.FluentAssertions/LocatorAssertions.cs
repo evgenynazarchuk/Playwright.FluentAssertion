@@ -1,4 +1,28 @@
-﻿using Microsoft.Playwright;
+﻿/*
+ * MIT License
+ *
+ * Copyright (c) Evgeny Nazarchuk.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+using Microsoft.Playwright;
 using Playwright.Synchronous;
 
 namespace Playwright.FluentAssertions;
@@ -253,10 +277,11 @@ Because: {because}
     public static ILocator HaveTextContent(
         this ReferenceTypeAssertion<ILocator> locator,
         string expected,
-        string because = "no reason given")
+        string because = "no reason given",
+        LocatorTextContentOptions? textContentOptions = null)
     {
         var element = locator.Value;
-        var actual = element.TextContent() ?? "";
+        var actual = element.TextContent(textContentOptions) ?? "";
 
         if (string.Compare(actual, expected) != 0)
         {
@@ -277,10 +302,11 @@ Because:
     public static ILocator HaveNotTextContent(
         this ReferenceTypeAssertion<ILocator> locator,
         string notExpected,
-        string because = "no reason given")
+        string because = "no reason given",
+        LocatorTextContentOptions? textContentOptions = null)
     {
         var element = locator.Value;
-        var actual = element.TextContent() ?? "";
+        var actual = element.TextContent(textContentOptions) ?? "";
 
         if (string.Compare(actual, notExpected) == 0)
         {
@@ -301,19 +327,20 @@ Because:
     public static ILocator HaveInnerHTML(
         this ReferenceTypeAssertion<ILocator> locator,
         string expected,
-        string because = "no reason given")
+        string because = "no reason given",
+        LocatorInnerHTMLOptions? innerHtmlOptions = null)
     {
         var element = locator.Value;
-        var actual = element.InnerHTML() ?? "";
+        var value = element.InnerHTML(innerHtmlOptions);
 
-        if (string.Compare(actual, expected) != 0)
+        if (string.Compare(value, expected) != 0)
         {
             throw new AssertException(@$"
-BeInnerHTML Assert Exception
+HaveInnerHTML Assert Exception
 Expected:
 {expected}
 Actual:
-{actual}
+{value}
 Because:
 {because}
 ");
@@ -325,19 +352,20 @@ Because:
     public static ILocator HaveNotInnerHTML(
         this ReferenceTypeAssertion<ILocator> locator,
         string notExpected,
-        string because = "no reason given")
+        string because = "no reason given",
+        LocatorInnerHTMLOptions? innerHtmlOptions = null)
     {
         var element = locator.Value;
-        var actual = element.InnerHTML() ?? "";
+        var value = element.InnerHTML(innerHtmlOptions);
 
-        if (string.Compare(actual, notExpected) == 0)
+        if (string.Compare(value, notExpected) == 0)
         {
             throw new AssertException(@$"
-BeNotInnerHTML Assert Exception
+HaveNotInnerHTML Assert Exception
 Not expected:
 {notExpected}
 Actual:
-{actual}
+{value}
 Because:
 {because}
 ");
@@ -349,15 +377,16 @@ Because:
     public static ILocator HaveInnerText(
         this ReferenceTypeAssertion<ILocator> locator,
         string expected,
-        string because = "no reason given")
+        string because = "no reason given",
+        LocatorInnerTextOptions? innerTextOptions = null)
     {
         var element = locator.Value;
-        var actual = element.InnerText() ?? "";
+        var actual = element.InnerText(innerTextOptions);
 
         if (string.Compare(actual, expected) != 0)
         {
             throw new AssertException(@$"
-BeInnerText Assert Exception
+HaveInnerText Assert Exception
 Expected:
 {expected}
 Actual:
@@ -373,15 +402,16 @@ Because:
     public static ILocator HaveNotInnerText(
         this ReferenceTypeAssertion<ILocator> locator,
         string notExpected,
-        string because = "no reason given")
+        string because = "no reason given",
+        LocatorInnerTextOptions? innerTextOptions = null)
     {
         var element = locator.Value;
-        var actual = element.InnerText() ?? "";
+        var actual = element.InnerText(innerTextOptions);
 
         if (string.Compare(actual, notExpected) == 0)
         {
             throw new AssertException(@$"
-BeNotInnerText Assert Exception
+HaveNotInnerText Assert Exception
 Not expected:
 {notExpected}
 Actual:
@@ -397,15 +427,16 @@ Because:
     public static ILocator HaveInputValue(
         this ReferenceTypeAssertion<ILocator> locator,
         string expected,
-        string because = "no reason given")
+        string because = "no reason given",
+        LocatorInputValueOptions? inputOptions = null)
     {
         var element = locator.Value;
-        var actual = element.InputValue() ?? "";
+        var actual = element.InputValue(inputOptions);
 
         if (string.Compare(actual, expected) != 0)
         {
             throw new AssertException(@$"
-BeInputValue Assert Exception
+HaveInputValue Assert Exception
 Expected:
 {expected}
 Actual:
@@ -421,15 +452,16 @@ Because:
     public static ILocator HaveNotInputValue(
         this ReferenceTypeAssertion<ILocator> locator,
         string notExpected,
-        string because = "no reason given")
+        string because = "no reason given",
+        LocatorInputValueOptions? inputOptions = null)
     {
         var element = locator.Value;
-        var actual = element.InputValue() ?? "";
+        var actual = element.InputValue(inputOptions);
 
         if (string.Compare(actual, notExpected) == 0)
         {
             throw new AssertException(@$"
-BeNotInputValue Assert Exception
+HaveNotInputValue Assert Exception
 Not expected:
 {notExpected}
 Actual:
@@ -448,12 +480,12 @@ Because:
         string because = "no reason given")
     {
         var element = locator.Value;
-        var attribute = element.GetAttribute(attributeName);
+        var value = element.GetAttribute(attributeName);
 
-        if (attribute is null)
+        if (value is null)
         {
             throw new AssertException(@$"
-BeAttribute Assert Exception
+HaveAttribute Assert Exception
 Expected attribute: {attributeName}
 Because: {because}
 ");
@@ -468,12 +500,12 @@ Because: {because}
         string because = "no reason given")
     {
         var element = locator.Value;
-        var attribute = element.GetAttribute(attributeName);
+        var value = element.GetAttribute(attributeName);
 
-        if (attribute is not null)
+        if (value is not null)
         {
             throw new AssertException(@$"
-BeNotAttribute Assert Exception
+HaveNotAttribute Assert Exception
 Not expected attribute: {attributeName}
 Because: {because}
 ");

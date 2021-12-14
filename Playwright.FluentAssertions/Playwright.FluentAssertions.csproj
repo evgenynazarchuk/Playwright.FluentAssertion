@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
 
 	  <OutputType>Library</OutputType>
-	  <Version>1.17.0.14</Version>
+	  <Version>1.17.0.15</Version>
 	  <Authors>Evgeny Nazarchuk</Authors>
 	  <PackageProjectUrl>https://github.com/evgenynazarchuk/Playwright.FluentAssertions/wiki</PackageProjectUrl>
 	  <RepositoryUrl>https://github.com/evgenynazarchuk/Playwright.FluentAssertions</RepositoryUrl>
@@ -19,7 +19,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Playwright" Version="1.17.2" />
-    <PackageReference Include="Playwright.Synchronous" Version="1.17.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Playwright.Synchronous">
+      <HintPath>..\..\Playwright.Synchronous\Playwright.Synchronous\bin\Release\net6.0\Playwright.Synchronous.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

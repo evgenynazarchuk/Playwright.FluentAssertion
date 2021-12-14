@@ -34,6 +34,16 @@ public static class PageAssertions
         return new ReferenceTypeAssertion<IPage>(page);
     }
 
+    private static IElementHandle GetElement(IPage page,
+        string selector,
+        PageWaitForSelectorOptions? waitOptions = null,
+        PageQuerySelectorOptions? queryOptions = null)
+    {
+        page.WaitForSelector(selector, waitOptions);
+        var element = page.QuerySelector(selector, queryOptions)!;
+        return element!;
+    }
+
     public static IPage HaveTitle(
         this ReferenceTypeAssertion<IPage> page,
         string expected,
@@ -129,9 +139,10 @@ Because:
         this ReferenceTypeAssertion<IPage> page,
         string selector,
         string because = "no reason given",
-        PageQuerySelectorOptions? options = null)
+        PageWaitForSelectorOptions? waitOptions = null,
+        PageQuerySelectorOptions? queryOptions = null)
     {
-        var element = page.Value.FindElement(selector, options);
+        var element = GetElement(page.Value, selector, waitOptions, queryOptions);
         var isChecked = element.IsChecked();
 
         if (isChecked is false)
@@ -152,9 +163,10 @@ Because: {because}
         this ReferenceTypeAssertion<IPage> page,
         string selector,
         string because = "no reason given",
-        PageQuerySelectorOptions? options = null)
+        PageWaitForSelectorOptions? waitOptions = null,
+        PageQuerySelectorOptions? queryOptions = null)
     {
-        var element = page.Value.FindElement(selector, options);
+        var element = GetElement(page.Value, selector, waitOptions, queryOptions);
         var isChecked = element.IsChecked();
 
         if (isChecked is true)
@@ -175,9 +187,10 @@ Because: {because}
         this ReferenceTypeAssertion<IPage> page,
         string selector,
         string because = "no reason given",
-        PageQuerySelectorOptions? options = null)
+        PageWaitForSelectorOptions? waitOptions = null,
+        PageQuerySelectorOptions? queryOptions = null)
     {
-        var element = page.Value.FindElement(selector, options);
+        var element = GetElement(page.Value, selector, waitOptions, queryOptions);
         var isDisabled = element.IsDisabled();
 
         if (isDisabled is false)
@@ -198,9 +211,10 @@ Because: {because}
         this ReferenceTypeAssertion<IPage> page,
         string selector,
         string because = "no reason given",
-        PageQuerySelectorOptions? options = null)
+        PageWaitForSelectorOptions? waitOptions = null,
+        PageQuerySelectorOptions? queryOptions = null)
     {
-        var element = page.Value.FindElement(selector, options);
+        var element = GetElement(page.Value, selector, waitOptions, queryOptions);
         var isDisabled = element.IsDisabled();
 
         if (isDisabled is true)
@@ -221,9 +235,10 @@ Because: {because}
         this ReferenceTypeAssertion<IPage> page,
         string selector,
         string because = "no reason given",
-        PageQuerySelectorOptions? options = null)
+        PageWaitForSelectorOptions? waitOptions = null,
+        PageQuerySelectorOptions? queryOptions = null)
     {
-        var element = page.Value.FindElement(selector, options);
+        var element = GetElement(page.Value, selector, waitOptions, queryOptions);
         var isEditable = element.IsEditable();
 
         if (isEditable is false)
@@ -244,9 +259,10 @@ Because: {because}
         this ReferenceTypeAssertion<IPage> page,
         string selector,
         string because = "no reason given",
-        PageQuerySelectorOptions? options = null)
+        PageWaitForSelectorOptions? waitOptions = null,
+        PageQuerySelectorOptions? queryOptions = null)
     {
-        var element = page.Value.FindElement(selector, options);
+        var element = GetElement(page.Value, selector, waitOptions, queryOptions);
         var isEditable = element.IsEditable();
 
         if (isEditable is true)
@@ -267,9 +283,10 @@ Because: {because}
         this ReferenceTypeAssertion<IPage> page,
         string selector,
         string because = "no reason given",
-        PageQuerySelectorOptions? options = null)
+        PageWaitForSelectorOptions? waitOptions = null,
+        PageQuerySelectorOptions? queryOptions = null)
     {
-        var element = page.Value.FindElement(selector, options);
+        var element = GetElement(page.Value, selector, waitOptions, queryOptions);
         var isEnabled = element.IsEnabled();
 
         if (isEnabled is false)
@@ -290,9 +307,10 @@ Because: {because}
         this ReferenceTypeAssertion<IPage> page,
         string selector,
         string because = "no reason given",
-        PageQuerySelectorOptions? options = null)
+        PageWaitForSelectorOptions? waitOptions = null,
+        PageQuerySelectorOptions? queryOptions = null)
     {
-        var element = page.Value.FindElement(selector, options);
+        var element = GetElement(page.Value, selector, waitOptions, queryOptions);
         var isEnabled = element.IsEnabled();
 
         if (isEnabled is true)
@@ -313,9 +331,10 @@ Because: {because}
         this ReferenceTypeAssertion<IPage> page,
         string selector,
         string because = "no reason given",
-        PageQuerySelectorOptions? options = null)
+        PageWaitForSelectorOptions? waitOptions = null,
+        PageQuerySelectorOptions? queryOptions = null)
     {
-        var element = page.Value.FindElement(selector, options);
+        var element = GetElement(page.Value, selector, waitOptions, queryOptions);
         var isHidden = element.IsHidden();
 
         if (isHidden is false)
@@ -336,9 +355,10 @@ Because: {because}
         this ReferenceTypeAssertion<IPage> page,
         string selector,
         string because = "no reason given",
-        PageQuerySelectorOptions? options = null)
+        PageWaitForSelectorOptions? waitOptions = null,
+        PageQuerySelectorOptions? queryOptions = null)
     {
-        var element = page.Value.FindElement(selector, options);
+        var element = GetElement(page.Value, selector, waitOptions, queryOptions);
         var isHidden = element.IsHidden();
 
         if (isHidden is true)
@@ -359,9 +379,10 @@ Because: {because}
         this ReferenceTypeAssertion<IPage> page,
         string selector,
         string because = "no reason given",
-        PageQuerySelectorOptions? options = null)
+        PageWaitForSelectorOptions? waitOptions = null,
+        PageQuerySelectorOptions? queryOptions = null)
     {
-        var element = page.Value.FindElement(selector, options);
+        var element = GetElement(page.Value, selector, waitOptions, queryOptions);
         var isVisible = element.IsVisible();
 
         if (isVisible is false)
@@ -382,9 +403,10 @@ Because: {because}
         this ReferenceTypeAssertion<IPage> page,
         string selector,
         string because = "no reason given",
-        PageQuerySelectorOptions? options = null)
+        PageWaitForSelectorOptions? waitOptions = null,
+        PageQuerySelectorOptions? queryOptions = null)
     {
-        var element = page.Value.FindElement(selector, options);
+        var element = GetElement(page.Value, selector, waitOptions, queryOptions);
         var isVisible = element.IsVisible();
 
         if (isVisible is true)
@@ -406,9 +428,10 @@ Because: {because}
         string selector,
         string expected,
         string because = "no reason given",
-        PageQuerySelectorOptions? options = null)
+        PageWaitForSelectorOptions? waitOptions = null,
+        PageQuerySelectorOptions? queryOptions = null)
     {
-        var element = page.Value.FindElement(selector, options);
+        var element = GetElement(page.Value, selector, waitOptions, queryOptions);
         var actual = element.TextContent() ?? "";
 
         if (string.Compare(actual, expected) != 0)
@@ -433,9 +456,10 @@ Because:
         string selector,
         string notExpected,
         string because = "no reason given",
-        PageQuerySelectorOptions? options = null)
+        PageWaitForSelectorOptions? waitOptions = null,
+        PageQuerySelectorOptions? queryOptions = null)
     {
-        var element = page.Value.FindElement(selector, options);
+        var element = GetElement(page.Value, selector, waitOptions, queryOptions);
         var actual = element.TextContent() ?? "";
 
         if (string.Compare(actual, notExpected) == 0)
@@ -460,10 +484,11 @@ Because:
         string selector,
         string expected,
         string because = "no reason given",
-        PageQuerySelectorOptions? options = null)
+        PageWaitForSelectorOptions? waitOptions = null,
+        PageQuerySelectorOptions? queryOptions = null)
     {
-        var element = page.Value.FindElement(selector, options);
-        var actual = element.InnerHTML() ?? "";
+        var element = GetElement(page.Value, selector, waitOptions, queryOptions);
+        var actual = element.InnerHTML();
 
         if (string.Compare(actual, expected) != 0)
         {
@@ -487,10 +512,11 @@ Because:
         string selector,
         string notExpected,
         string because = "no reason given",
-        PageQuerySelectorOptions? options = null)
+        PageWaitForSelectorOptions? waitOptions = null,
+        PageQuerySelectorOptions? queryOptions = null)
     {
-        var element = page.Value.FindElement(selector, options);
-        var actual = element.InnerHTML() ?? "";
+        var element = GetElement(page.Value, selector, waitOptions, queryOptions);
+        var actual = element.InnerHTML();
 
         if (string.Compare(actual, notExpected) == 0)
         {
@@ -514,10 +540,11 @@ Because:
         string selector,
         string expected,
         string because = "no reason given",
-        PageQuerySelectorOptions? options = null)
+        PageWaitForSelectorOptions? waitOptions = null,
+        PageQuerySelectorOptions? queryOptions = null)
     {
-        var element = page.Value.FindElement(selector, options);
-        var actual = element.InnerText() ?? "";
+        var element = GetElement(page.Value, selector, waitOptions, queryOptions);
+        var actual = element.InnerText();
 
         if (string.Compare(actual, expected) != 0)
         {
@@ -541,10 +568,11 @@ Because:
         string selector,
         string notExpected,
         string because = "no reason given",
-        PageQuerySelectorOptions? options = null)
+        PageWaitForSelectorOptions? waitOptions = null,
+        PageQuerySelectorOptions? queryOptions = null)
     {
-        var element = page.Value.FindElement(selector, options);
-        var actual = element.InnerText() ?? "";
+        var element = GetElement(page.Value, selector, waitOptions, queryOptions);
+        var actual = element.InnerText();
 
         if (string.Compare(actual, notExpected) == 0)
         {
@@ -568,10 +596,12 @@ Because:
         string selector,
         string expected,
         string because = "no reason given",
-        PageQuerySelectorOptions? options = null)
+        PageWaitForSelectorOptions? waitOptions = null,
+        PageQuerySelectorOptions? queryOptions = null,
+        ElementHandleInputValueOptions? inputOptions = null)
     {
-        var element = page.Value.FindElement(selector, options);
-        var actual = element.InputValue() ?? "";
+        var element = GetElement(page.Value, selector, waitOptions, queryOptions);
+        var actual = element.InputValue(inputOptions);
 
         if (string.Compare(actual, expected) != 0)
         {
@@ -595,10 +625,12 @@ Because:
         string selector,
         string notExpected,
         string because = "no reason given",
-        PageQuerySelectorOptions? options = null)
+        PageWaitForSelectorOptions? waitOptions = null,
+        PageQuerySelectorOptions? queryOptions = null,
+        ElementHandleInputValueOptions? inputOptions = null)
     {
-        var element = page.Value.FindElement(selector, options);
-        var actual = element.InputValue() ?? "";
+        var element = GetElement(page.Value, selector, waitOptions, queryOptions);
+        var actual = element.InputValue(inputOptions);
 
         if (string.Compare(actual, notExpected) == 0)
         {
@@ -622,15 +654,13 @@ Because:
         string selector,
         string attributeName,
         string because = "no reason given",
-        PageQuerySelectorOptions? options = null)
+        PageWaitForSelectorOptions? waitOptions = null,
+        PageQuerySelectorOptions? queryOptions = null)
     {
-        var element = page.Value.FindElement(selector, options);
+        var element = GetElement(page.Value, selector, waitOptions, queryOptions);
+        var value = element.GetAttribute(attributeName);
 
-        try
-        {
-            element.GetAttribute(attributeName);
-        }
-        catch
+        if (value is null)
         {
             throw new AssertException(@$"
 HaveElementAttribute Assert Exception
@@ -648,25 +678,23 @@ Because: {because}
         string selector,
         string attributeName,
         string because = "no reason given",
-        PageQuerySelectorOptions? options = null)
+        PageWaitForSelectorOptions? waitOptions = null,
+        PageQuerySelectorOptions? queryOptions = null)
     {
-        var element = page.Value.FindElement(selector, options);
+        var element = GetElement(page.Value, selector, waitOptions, queryOptions);
+        var value = element.GetAttribute(attributeName);
 
-        try
+        if (value is not null)
         {
-            element.GetAttribute(attributeName);
-        }
-        catch
-        {
-            return page.Value;
-        }
-
-        throw new AssertException(@$"
+            throw new AssertException(@$"
 HaveNotElementAttribute Assert Exception
 Selector: {selector}
 Not expected attribute: {attributeName}
 Because: {because}
 ");
+        }
+
+        return page.Value;
     }
 
     public static IPage HaveElementAttributeValue(
@@ -675,28 +703,57 @@ Because: {because}
         string attributeName,
         string expectedAttributeValue,
         string because = "no reason given",
-        PageQuerySelectorOptions? options = null)
+        PageWaitForSelectorOptions? waitOptions = null,
+        PageQuerySelectorOptions? queryOptions = null)
     {
-        var element = page.Value.FindElement(selector, options);
-        string? actualAttributeValue = null;
+        var element = GetElement(page.Value, selector, waitOptions, queryOptions);
+        var value = element.GetAttribute(attributeName);
 
-        try
-        {
-            actualAttributeValue = element.GetAttribute(attributeName) ?? "";
-        }
-        catch
+        if (value is null)
         {
             throw new AssertException($"Attribute not found. Attibute name: {attributeName}");
         }
 
-        if (string.Compare(actualAttributeValue, expectedAttributeValue) != 0)
+        if (string.Compare(value, expectedAttributeValue) != 0)
         {
             throw new AssertException(@$"
 HaveElementAttributeValue Assert Exception
 Selector: {selector}
 Expected attribute: {attributeName}
 Expected attribute value: {expectedAttributeValue}
-Actual attribute value: {actualAttributeValue}
+Actual attribute value: {value}
+Because: {because}
+");
+        }
+
+        return page.Value;
+    }
+
+    public static IPage HaveElementNotAttributeValue(
+        this ReferenceTypeAssertion<IPage> page,
+        string selector,
+        string attributeName,
+        string expectedAttributeValue,
+        string because = "no reason given",
+        PageWaitForSelectorOptions? waitOptions = null,
+        PageQuerySelectorOptions? queryOptions = null)
+    {
+        var element = GetElement(page.Value, selector, waitOptions, queryOptions);
+        var value = element.GetAttribute(attributeName);
+
+        if (value is null)
+        {
+            throw new AssertException($"Attribute not found. Attibute name: {attributeName}");
+        }
+
+        if (string.Compare(value, expectedAttributeValue) == 0)
+        {
+            throw new AssertException(@$"
+HaveElementNotAttributeValue Assert Exception
+Selector: {selector}
+Expected attribute: {attributeName}
+Not expected attribute value: {expectedAttributeValue}
+Actual attribute value: {value}
 Because: {because}
 ");
         }
@@ -710,24 +767,25 @@ Because: {because}
         string styleName,
         string expectedStyleValue,
         string because = "no reason given",
-        PageQuerySelectorOptions? options = null)
+        PageWaitForSelectorOptions? waitOptions = null,
+        PageQuerySelectorOptions? queryOptions = null)
     {
-        var element = page.Value.FindElement(selector, options);
-        var actualStyleValue = element.Evaluate($"e => getComputedStyle(e).{styleName}", element).ToString();
+        var element = GetElement(page.Value, selector, waitOptions, queryOptions);
+        var value = element.Evaluate($"e => getComputedStyle(e).{styleName}", element).ToString();
 
-        if (actualStyleValue == "")
+        if (value == "")
         {
             throw new AssertException($"Style not found. Style name: {styleName}");
         }
 
-        if (string.Compare(actualStyleValue, expectedStyleValue) != 0)
+        if (string.Compare(value, expectedStyleValue) != 0)
         {
             throw new AssertException($@"
-HaveComputedStyle Assert Exception
+HaveElementComputedStyle Assert Exception
 Selector: {selector}
 Style name: {styleName}
 Expected style value: {expectedStyleValue}
-Actual style value: {actualStyleValue}
+Actual style value: {value}
 Because: {because}
 ");
         }
